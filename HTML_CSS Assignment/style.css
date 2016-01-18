@@ -1,0 +1,69 @@
+/* Adds borders to the table, and general styling for row headers */
+table {
+    border: solid;
+}
+
+th, td {
+    border: solid;
+}
+
+tbody th {
+    font-style: italic;
+    font-weight: normal;
+}
+
+/* This is used to achieve the extra credit, by alternating row coloring */
+tbody tr:nth-of-type(2n+1) { 
+    background-color: lightgreen; 
+}
+
+tbody tr:nth-of-type(2n) { 
+    background-color: lightblue; 
+}
+
+/* This mimics the example by coloring first row of td's red, and second blue */
+tbody tr td:nth-child(2) {
+    color: red;
+    border-color: black;
+}
+
+tbody tr td:nth-child(4) {
+    color: blue;
+    border-color: black;
+}
+
+/* Needed the field sets to have space between each other, otherwise looked scrunched */
+fieldset {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* This was used to achieve the div within a div functionality */
+.outer-content {
+    background-color: pink;
+    width: 75%;
+    margin-top: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.inner-content {
+    background-color: lightblue;
+    width: 75%;
+    margin: auto;
+    text-align: center;
+    position: relative;
+}
+
+/* Added this for fun to test out IDs, wanted something to differentiate the POST from the GET with */
+#text_input2 {
+    background-color: lightgray;
+}
+
+#numerical_input2 {
+    background-color: lightgray;
+}
+
+#password_input2 {
+    background-color: lightgray;
+}
