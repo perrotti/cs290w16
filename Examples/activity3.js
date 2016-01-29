@@ -16,7 +16,7 @@ function deepEqual(a, b) {
       }
     // If it wasn't an object, need to do normal comparisons
     } else {
-      // If the two items are equivalent, then return true, otherwise, false
+      // If the two items are equivalant, then return true, otherwise, false
       if (a === b) {
         return true;
       } else {
@@ -26,7 +26,7 @@ function deepEqual(a, b) {
   }
 };
 
-// Added additional test cases relevant to making sure the function worked
+// Added additional test cases relavant to making sure the function worked
 var obj = {here: {is: "an"}, object: 2};
 var obj2 = {here: {is: "blue"}, object: 2};
 console.log(deepEqual(obj, obj));
