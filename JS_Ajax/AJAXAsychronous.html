@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Assignment: AJAX Part 1</title>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <legend>Weather Finder</legend>
+        <p>Enter a City and State</p>
+        <!-- This field set contains the input for city and state -->
+        <fieldset>
+          <label for="city_input">City:
+            <input type="text" id="city-input" name="city_input" size="30" maxlength="30" placeholder="Seattle" />
+          </label>
+          <br /><br />
+          <label for="state_input">State:
+            <input type="text" id="state-input" name="state_input" size="10" placeholder="WA" />
+          </label>
+        </fieldset>
+        <p>Or enter a Zip Code</p>
+        <!-- This field set contains the input for zip code -->
+        <fieldset>
+          <label for="zip_code">Zip Code:
+            <input type="number" id="zip-code" name="zip_code" size="20" placeholder="98004" />
+          </label>
+        </fieldset>
+        <br />
+        <!-- This is the submit button for the city&state or zip details -->
+        <input type="submit" value="submit" id="submit" >
+      </fieldset>
+    </form>
+    <!-- This is a div to hold the output from the script -->
+    <div id="output-div"></div>
+    <!-- This script contains the java needed to submit to the API, and develop the results -->
+    <script src="weather.js"></script>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <legend>Weather Finder</legend>
+        <fieldset>
+          <label for="city_input">City:
+            <input type="text" id="city-input" name="city_input" size="30" maxlength="30" placeholder="Seattle" />
+          </label>
+          <br /><br />
+          <label for="state_input">State:
+            <input type="text" id="state-input" name="state_input" size="10" placeholder="WA" />
+          </label>
+        </fieldset>
+        <p>Or enter a Zip Code</p>
+        <fieldset>
+          <label for="zip_code">Zip Code:
+            <input type="number" id="zip-code" name="zip_code" size="20" placeholder="98004" />
+          </label>
+        </fieldset>
+        <br />
+          <input type="submit" value="submit" id="submit" >
+      </fieldset>
+    </form>
+    <div id="output-div"></div>
+    <script>
+      var key = "&appid=b65bd77d0451298f757069747d71a4de";
+      var outputDiv = document.getElementById("output-div");
+      var pNames = ["city", "temp", "humidity"];
+      var pText = ["City: ", "Temperate (F): ", "Humidity: "];
+      for (var i = 0; i < 3; i++) {
+        var tempP = document.createElement("P");
+        tempP.id = pNames[i];
+        tempP.textContent = pText[i];
+        outputDiv.appendChild(tempP);
+      }
+
+      document.addEventListener('DOMContentLoaded', formSubmission);
+      
+      function formSubmission() {
+        document.getElementById('submit').addEventListener('click', function(event) { 
+          var city = document.getElementById("city-input").value;
+          var state = document.getElementById("state-input").value;
+          var zip = document.getElementById("zip-code").value;
+          var url = "http://api.openweathermap.org/data/2.5/weather?"
+          if (city != "" && state != "") {
+            url = url + "q=" + city + "," + state + key;
+          } else if (zip != "") {
+            url = url + "zip=" + zip + "," + "us" + key;
+          } else {
+            url = "DO NOT SEND";
+          }
+
+          if (url != "DO NOT SEND") {
+            var req = new XMLHttpRequest();
+            req.open("GET", url, false);
+            req.send(null);
+            var weather = JSON.parse(req.responseText);
+            var tempF = (1.8 * (weather.main.temp - 273)) + 32;
+            document.getElementById("city").textContent = pText[0] + weather.name;
+            document.getElementById("temp").textContent = pText[1] + tempF;
+            document.getElementById("humidity").textContent = pText[2] + weather.main.humidity + "%";
+            event.preventDefault();
+          } else {
+            event.preventDefault();
+          }
+        })
+      }
+    </script>
+  </body>
+</html>

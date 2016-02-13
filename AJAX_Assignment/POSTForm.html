@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Assignment: AJAX Part 2</title>
+  </head>
+  <body>
+    <form>
+      <fieldset>
+        <legend>POST Tester</legend>
+        <br />
+        <!-- This field set contains the input for the three items to pass to the API -->
+        <fieldset>
+          <label for="item1">Something to send 1:
+            <input type="text" id="item1" name="item1" size="30" maxlength="30" placeholder="Type something..." />
+          </label>
+          <br /><br />
+          <label for="item2">Something to send 2:
+            <input type="text" id="item2" name="item2" size="30" maxlength="30" placeholder="Type something..." />
+          </label>
+          <br /><br />
+          <label for="item3">Something to send 3:
+            <input type="text" id="item3" name="item3" size="30" maxlength="30" placeholder="Type something..." />
+          </label>
+        </fieldset>
+        <br />
+        <!-- This is the submit button for the item details -->
+        <input type="submit" value="submit" id="submit" >
+      </fieldset>
+    </form>
+    <!-- This is a header and paragraphs for the output from the script -->
+    <h2>Results:</h2>
+    <p id="display1">Item 1: </p>
+    <p id="display2">Item 2: </p>
+    <p id="display3">Item 3: </p>
+    <!-- This script contains the java needed to submit to the API, and develop the results -->
+    <script src="post.js"></script>
+  </body>
+</html>

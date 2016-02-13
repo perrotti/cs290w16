@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <div id="test"></div>
+    <script>
+      var req = new XMLHttpRequest();
+      req.open("GET", "http://api.openweathermap.org/data/2.5/weather?zip=98109,us&appid=b65bd77d0451298f757069747d71a4de", false);
+      req.send(null);
+      var weather = JSON.parse(req.responseText);
+      console.log(weather);
+      var tempF = (1.8 * (weather.main.temp - 273)) + 32;
+      document.getElementById("test").style.background = "light                  blue";
+      document.getElementById("test").textContent = weather.name + " Temperature: " + tempF;
+    </script>
+  </body>
+</html>
