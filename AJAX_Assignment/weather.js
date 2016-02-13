@@ -1,4 +1,4 @@
-var key = "b65bd77d0451298f757069747d71a4de"; // User can input their openweathermap API key here
+var key = ""; // User can input their openweathermap API key here
 
 // This section of the javascript creates the output elements (<p>) for the results of city, temp, and humidity
 var outputDiv = document.getElementById("output-div");
