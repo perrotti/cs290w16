@@ -30,8 +30,10 @@ app.get('/get-post', function(req, res) {
   // Check to see if data was not provided 
   if (queryParams == null) {
     displayItem.noData = true;
+    displayItem.header = 'You didn\'t provide any data!';
   } else {
-    displayItem.getReq = true;
+    displayItem.reqWorked = true;
+    displayItem.header = 'GET Request Received';
   }
   displayItem.dataList = queryParams;
   // Render the get-post handlebars page
@@ -50,8 +52,10 @@ app.post('/get-post', function(req, res) {
   // Check to see if the data was not provided
   if (queryParams == null) {
     displayItem.noData = true;
+    displayItem.header = 'You didn\'t provide any data!';
   } else {
-    displayItem.postReq = true;
+    displayItem.reqWorked = true;
+    displayItem.header = 'POST Request Received';
   }
   displayItem.dataList = queryParams;
   // Render the get-post handlebars page

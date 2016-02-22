@@ -1,14 +1,5 @@
-{{#if getReq}}
-  <h1>You sent the following data via a GET request:</h1>
-  <ol>  
-    {{#each dataList}}
-      <li>{{this.name}}: {{this.value}}
-    {{/each}}
-  </ol>
-{{/if}}
-
-{{#if postReq}}
-  <h1>You sent the following data via a POST request:</h1>
+{{#if reqWorked}}
+  <h1>{{header}}</h1>
   <ol>
     {{#each dataList}}
       <li>{{this.name}}: {{this.value}}
@@ -17,5 +8,5 @@
 {{/if}}
 
 {{#if noData}}
-  <h1>You didn't send any data!!!</h1>
+  <h1>{{header}}</h1>
 {{/if}}
