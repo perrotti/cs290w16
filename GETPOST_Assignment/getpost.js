@@ -27,11 +27,14 @@ app.get('/get-post', function(req, res) {
   }
   // Create a variable to store the values
   var displayItem = {};
-  // Check to see if data was not provided 
-  if (queryParams == null) {
+  // Check to see if data was not provided
+  console.log(queryParams); 
+  if (queryParams.length <= 0) {
     displayItem.noData = true;
+    displayItem.reqWorked = false;
     displayItem.header = 'You didn\'t provide any data!';
   } else {
+    displayItem.noData = false;
     displayItem.reqWorked = true;
     displayItem.header = 'GET Request Received';
   }
@@ -50,10 +53,12 @@ app.post('/get-post', function(req, res) {
   // Create a variable to store the values
   var displayItem = {};
   // Check to see if the data was not provided
-  if (queryParams == null) {
+  if (queryParams.length <= 0) {
     displayItem.noData = true;
+    displayItem.reqWorked = false;
     displayItem.header = 'You didn\'t provide any data!';
   } else {
+    displayItem.noData = false;
     displayItem.reqWorked = true;
     displayItem.header = 'POST Request Received';
   }
