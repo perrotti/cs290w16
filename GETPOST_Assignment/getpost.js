@@ -1,42 +1,21 @@
+// Boiler plate code from the lectures
 var express = require('express');
 var bodyParser = require('body-parser');
-
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
+// More boiler plate...
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
+
+// Set the port to 5000
 app.set('port', 5000);
 
+// Home page still generates so you can see something
 app.get('/', function(req, res) {
   res.render('home');
-});
-
-app.get('/beach', function(req, res) {
-  res.render('beach');  
-});
-
-function genNum() {
-  var displayItem = {};
-  displayItem.randomNumber = Math.floor((Math.random() * 10)) + 1;
-  return displayItem;
-}
-
-function genTime() {
-  var displayItem = {};
-  displayItem.time = (new Date(Date.now())).toLocaleTimeString('en-US');
-  return displayItem;
-}
-
-
-app.get('/number', function(req, res) {
-  res.render('number', genNum());
-});
-
-app.get('/time', function(req, res) {
-  res.render('time', genTime());
 });
 
 // This handles the get request
@@ -48,7 +27,12 @@ app.get('/get-post', function(req, res) {
   }
   // Create a variable to store the values
   var displayItem = {};
-  displayItem.getReq = true;
+  // Check to see if data was not provided 
+  if (queryParams == null) {
+    displayItem.noData = true;
+  } else {
+    displayItem.getReq = true;
+  }
   displayItem.dataList = queryParams;
   // Render the get-post handlebars page
   res.render('get-post', displayItem);
@@ -63,24 +47,31 @@ app.post('/get-post', function(req, res) {
   }
   // Create a variable to store the values
   var displayItem = {};
-  // Lets us know this is a POST request in handlebars
-  displayItem.getReq = false;
+  // Check to see if the data was not provided
+  if (queryParams == null) {
+    displayItem.noData = true;
+  } else {
+    displayItem.postReq = true;
+  }
   displayItem.dataList = queryParams;
   // Render the get-post handlebars page
   res.render('get-post', displayItem);
 });
 
+// Standard page not found error
 app.use(function(req, res) {
   res.status(404);
   res.render('404');
 });
 
+// Server issue error
 app.use(function(err, req, res, next) {
   console.error(err.stack);
   res.status(500);
   res.render('500');
 });
 
+// Start server listening... and post to console to let us know it is running
 app.listen(app.get('port'), function() {
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
 });

@@ -7,11 +7,15 @@
   </ol>
 {{/if}}
 
-{{#unless getReq}}
+{{#if postReq}}
   <h1>You sent the following data via a POST request:</h1>
   <ol>
     {{#each dataList}}
       <li>{{this.name}}: {{this.value}}
     {{/each}}
   </ol>
-{{/unless}}
+{{/if}}
+
+{{#if noData}}
+  <h1>You didn't send any data!!!</h1>
+{{/if}}
