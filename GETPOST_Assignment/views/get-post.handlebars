@@ -1,0 +1,17 @@
+{{#if getReq}}
+  <h1>You sent the following data via a GET request:</h1>
+  <ol>  
+    {{#each dataList}}
+      <li>{{this.name}}: {{this.value}}
+    {{/each}}
+  </ol>
+{{/if}}
+
+{{#unless getReq}}
+  <h1>You sent the following data via a POST request:</h1>
+  <ol>
+    {{#each dataList}}
+      <li>{{this.name}}: {{this.value}}
+    {{/each}}
+  </ol>
+{{/unless}}

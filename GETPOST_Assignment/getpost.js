@@ -4,11 +4,11 @@ var bodyParser = require('body-parser');
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
-app.use(bodyParser.urlencoded({extended: false});
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 4700);
+app.set('port', 5000);
 
 app.get('/', function(req, res) {
   res.render('home');
@@ -39,26 +39,35 @@ app.get('/time', function(req, res) {
   res.render('time', genTime());
 });
 
-app.get('/get-adv', function(req, res) {
+// This handles the get request
+app.get('/get-post', function(req, res) {
   var queryParams = [];
+  // Loop through all of the items in the URL query section
   for (var p in req.query) {
     queryParams.push({'name':p,'value':req.query[p]});
   }
+  // Create a variable to store the values
   var displayItem = {};
+  displayItem.getReq = true;
   displayItem.dataList = queryParams;
-  res.render('get-adv', displayItem);
+  // Render the get-post handlebars page
+  res.render('get-post', displayItem);
 });
 
-app.post('/post-adv', function(req, res) {
+// This handles the post request
+app.post('/get-post', function(req, res) {
   var queryParams = [];
+  // Loop through all the values in the request body 
   for (var p in req.body) {
     queryParams.push({'name':p,'value':req.body[p]});
   }
-  console.log(queryParams);
-  console.log(req.body);
+  // Create a variable to store the values
   var displayItem = {};
+  // Lets us know this is a POST request in handlebars
+  displayItem.getReq = false;
   displayItem.dataList = queryParams;
-  res.render('post-adv', displayItem);
+  // Render the get-post handlebars page
+  res.render('get-post', displayItem);
 });
 
 app.use(function(req, res) {
