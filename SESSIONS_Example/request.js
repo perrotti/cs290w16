@@ -43,6 +43,7 @@ app.get('/m', function(req, res, next) {
       var info = JSON.parse(body);
       console.log("request 1 worked");
       input.owm = info.main.temp;
+      setTimeout(function() { }, 1000);
       request('http://api.openweathermap.org/data/2.5/weather?q=vancouver&APPID=' + key, function(err, response, body){
         if(!err && response.statuCode < 400) {
           var info2 = JSON.parse(body);
@@ -132,6 +133,5 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(app.get('port'), function() {
-  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.');
+  console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.')
 });
-
