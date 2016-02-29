@@ -1,0 +1,9 @@
+{{#unless err}}
+<h1>Welcome to the count page. I will let you know how many times you have visited</h1>
+<h3>You have visited {{count}} times</h3>
+<form action="/count" method="post">
+	<input type="submit" id="command" name="command" value="resetCount">
+</form>
+{{else}}
+<h1>INVALID SUBMISSION!</h1>
+{{/unless}}

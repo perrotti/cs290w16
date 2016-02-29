@@ -1,11 +1,36 @@
 var express = require('express');
+var session = require('express-session');
 
 var app = express();
 var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 
+app.use(session({secret: 'SuperSecretePassword'}));
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
-app.set('port', 4500);
+app.set('port', 4900);
+
+app.get('/count', function(req, res) {
+  var input = {};
+  input.count = req.session.count || 0;
+  req.session.count = input.count + 1;
+  res.render('count', input);
+});
+
+app.post('/count', function(req, res) {
+  var input = {};
+  for (var p in req.body ) {
+    if(p === "resetCount") {
+      req.session.destroy();
+    } else {
+      context.err = true;
+    }
+  }
+  
+  req.session.count = 0;
+  input.count = req.session.count || 0;
+  req.session.count = input.count + 1;
+  res.render('count', input);
+});
 
 app.get('/', function(req, res) {
   res.render('home');
