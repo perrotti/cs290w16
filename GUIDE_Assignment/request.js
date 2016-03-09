@@ -32,44 +32,24 @@ app.get('/basicsyntax', function(req, res, next) {
   input.javascriptfile = "/js/basicsyntax.js";
   res.render('basicsyntax', input);
 });
-/*
-app.post('/', function(req, res) {
+
+app.get('/apitest', function(req, res, next) {
   var input = {};
-
-  if(req.body['New List']) {
-    console.log("inside new list");
-    req.session.name = req.body.name;
-    req.session.toDo = [];
-    req.session.curId = 0;
-  }
-  
-  if(!req.session.name) {
-    console.log("inside no session name");
-    res.render('newSession', input);
-    return;
-  }
-
-  if(req.body['Add']) {
-    console.log("inside add item");
-    req.session.toDo.push({"name":req.body.name, "id":req.session.curId});
-    req.session.curId++;
-  }
-
-  if(req.body['Done']) {
-    console.log("inside done");
-    req.session.toDo = req.session.toDo.filter(function(e){
-      return e.id != req.body.id;
-    })
-  }
-
-  console.log("Finally rendering");
-  input.name = req.session.name;
-  input.toDoCount = req.session.toDo.length;
-  input.toDo = req.session.toDo;
-  console.log(input.toDo);
-  res.render('toDo', input);
+  request('http://api.openweathermap.org/data/2.5/weather?q=seattle&APPID=' + key, function(err, response, body) {
+    if(!err && response.statusCode < 400) {
+      var info = JSON.parse(body);
+      input.owm = info.main.temp;
+      res.render('weather-test', input);
+    } else {
+      if(response) {
+       console.log(response.statusCode);
+      }
+      next(err);
+    }
+  });
+  res.render('api', input);
 });
-*/
+
 app.use(function(req, res) {
   res.status(404);
   res.render('404');
