@@ -42,13 +42,13 @@ app.get('/apitest', function(req, res, next) {
       var info = JSON.parse(body);
       
       // Parse out the fields that we want to variables
-      input.title = info.list.resources[0].resource.fields.name;
+      input.one = info.list.resources[0].resource.fields.name;
       var temp = info.list.resources[0].resource.fields.day_low;
-      input.low = Number(temp).toFixed(2);
+      input.two = Number(temp).toFixed(2);
       temp = info.list.resources[0].resource.fields.price;
-      input.price = Number(temp).toFixed(2);
+      input.three = Number(temp).toFixed(2);
       temp = info.list.resources[0].resource.fields.day_high;
-      input.high = Number(temp).toFixed(2);
+      input.four = Number(temp).toFixed(2);
 
       res.render('apitest', input);
     } else {
