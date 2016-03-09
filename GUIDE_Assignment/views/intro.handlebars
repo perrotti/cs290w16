@@ -2,19 +2,40 @@
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar" margin-top=20px>
-        <li class="active"><a href="#">Introduction <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Basic Syntax</a></li>
-        <li><a href="#">Basic Example</a></li>
-        <li><a href="#">API Integration</a></li>
-        <li><a href="#">Chart Manipulation</a></li>
-        <li><a href="#">Integrated Example</a></li>
+        <li class="active"><a href="/intro">Introduction <span class="sr-only">(current)</span></a></li>
+        <li><a href="/basicsyntax">Basic Syntax</a></li>
+        <li><a href="/basicexample">Basic Example</a></li>
+        <li><a href="/api">API Integration</a></li>
+        <li><a href="/interactive">Interactive Charts</a></li>
+        <li><a href="/interactiveapi">Interactive API Example</a></li>
       </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <h1 class="page-header">Introduction to Google Charts</h1>
-      <p>Google Charts is an amazing API provided free of charge by Google. The API allows web developers to quickly and efficiently incorporate charts into  </p>
-      <h2 class="sub-header">This is something I want to talk about</h2>
-      <p> blah blah blah </p>
+      <p>Google Charts is an amazing API provided free of charge by Google. The API allows web 
+      developers to quickly and efficiently incorporate charts into their websites. A basic pie chart
+      can be added to a website with roughly 12 lines of javascript, as opposed to the countless hours
+      that would be spent generating them manually.</p>
+      <h2 class="sub-header">About This Guide</h2>
+      <p>This guide's purpose is not to spend time teaching the basics of Google Charts. 
+      <a href="https://developers.google.com/chart/interactive/docs/">Google's Guide</a> provides details
+      on how to get Google Charts up and running, along with detailed explanations of all the features, options,
+      and chart types.</p>
+      <p>While this guide is going to provide the basic details of how to get a chart running in the first two 
+      sections (hopefully more succently than Google's documentation), the guide is primarily going to focus on 
+      two important areas:<p>
+      <ul>
+        <li><a href="/api">Charting API Data</a></li>
+        <li><a href="/interactive">Creating Interactive Charts</a></li>
+      </ul>
+      <p>This guide will also be created using Express, Express-Handlebars, Express-Request, and Express-Async. 
+      This adds further complexity beyond the client side calls the Google Chart API demonstrates. This will be 
+      useful for creating server side code that can leverage databases, APIs, and other non-client side generated
+      charts. Hopefully with the tools demonstrated in this guide you will be ready to create a workout dashboard,
+      finance application, or maybe even a pick-up line success tracker (see example chart below).</p>
+      <div id="pick-up">
+      </div>
     </div>
   </div>
 </div>
+<script src="/js/intro.js"></script>
