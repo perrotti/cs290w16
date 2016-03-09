@@ -8,7 +8,7 @@ var handlebars = require('express-handlebars').create({defaultLayout:'main'});
 app.engine('handlebars', handlebars.engine);
 app.use(bodyParser.urlencoded({ extended: false} ));
 app.set('view engine', 'handlebars');
-app.set('port', 4950);
+app.set('port', 4960);
 app.use(express.static(__dirname + '/views/public'));
 
 var weatherKey = "b65bd77d0451298f757069747d71a4de";
