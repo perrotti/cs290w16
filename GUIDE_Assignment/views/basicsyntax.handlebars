@@ -18,9 +18,58 @@
       the simple pie chart displayed below.</p>
       <div id="food_chart">
       </div>
-      <h2 class="sub-header">About This Guide</h2>
-      <p>This guide's purpose is not to spend time teaching the basics of Google Charts. 
-      <a href="https://developers.google.com/chart/interactive/docs/">Google's Guide</a> provides details
+      <h2 class="sub-header">Breaking Down the Code</h2>
+      <p>I'm going to start by providing all of the code used to produce the chart above.</p>
+      <h4 class="sub-header">Javascript to be placed in HTML header</h4>
+      <pre class="prettyprint lang-js linenums">
+        /* Basic chart preperation files that must be included. 
+        For different chart types additional packages must be added.
+        For older versions of Google Chart releases, 'current' must be changed */
+        google.charts.load('current', {packages: ['corechart']});
+
+        /* This defines the "call back" function once the page loads
+        Change drawChart to the function you create */
+        google.charts.setOnLoadCallback(drawChart);
+
+        /* This controls all of the main functionality of the chart. 
+        You will organize your data, select your chart options, and draw 
+        the chart using this function */
+        function drawChart() {
+
+          // Create the data you want to include in your chart
+          var data = new google.visualization.arrayToDataTable([
+            ['Restaurant', 'Count'],
+            ['Tutta Bella', 1],
+            ['Sushi Mio', 3],
+            ['Chipotle', 7],
+            ['Thai Truck', 5],
+            ['Jimmy Johns', 2],
+            ['Chic-fil-a', 11]
+          ]);
+
+          // Set options for how the chart will be displayed
+          var options = {title:'Places I Have Eaten Lunch This Month',
+                         width:450,   // Width of chart
+                         height:300,  // Height of chart
+                         backgroundColor: {strokeWidth:3}}  // Put a border around the chart
+
+          /* This line does several things:
+          1) Creates a Google Chart and assigns it to a variable
+          2) Designates the chart type (PieChart in this case)
+          3) Indicates which HTML element will display the chart (food_chart in this case) */
+          var chart = new google.visualization.PieChart(document.getElementById('food_chart'));
+          
+          // This line draws the chart using the data and options designated above
+          chart.draw(data, options);
+        }
+      </pre>
+      <h4 class="sub-header">HTML needed in body (really, that is it)</h4>
+      <xmp class="prettyprint lang-html linenums">
+        <div id="food_chart">
+        </div>
+      </xmp>
+      
+      <p><a href="https://developers.google.com/chart/interactive/docs/">Google's Guide</a> provides details
       on how to get Google Charts up and running, along with detailed explanations of all the features, options,
       and chart types.</p>
       <p>While this guide is going to provide the basic details of how to get a chart running in the first two 
