@@ -4,7 +4,7 @@ function drawChart() {
   // Create the data table.
   var data = new google.visualization.DataTable();
   data.addColumn('string', 'Line');
-  data.addColumn('Success', 'Percentage');
+  data.addColumn('number', 'Percentage');
   data.addRows([
     ['Girl, you better have a license, cuz you are driving me crazy', 5],
     ['If beauty were measured in seconds, you would be an hour!', 7],
