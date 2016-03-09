@@ -28,7 +28,7 @@ app.get('/intro', function(req, res, next) {
 app.get('/basicsyntax', function(req, res, next) {
   var input = {};
   input.javascriptfile = "/js/basicsyntax.js";
-  res.render('intro', input);
+  res.render('basicsyntax', input);
 });
 /*
 app.post('/', function(req, res) {
