@@ -15,18 +15,13 @@ function drawChart() {
   // Create the data you want to include in your chart
   var data = new google.visualization.arrayToDataTable(chartData);
 
-  // Set options for how the chart will be displayed
+
   var options = {title:'Places I Have Eaten Lunch This Month',
                  width:450,   // Width of chart
                  height:300,  // Height of chart
                  backgroundColor: {strokeWidth:3}}  // Put a border around the chart
 
-  /* This line does several things:
-  1) Creates a Google Chart and assigns it to a variable
-  2) Designates the chart type (PieChart in this case)
-  3) Indicates which HTML element will display the chart (food_chart in this case) */
-  var chart = new google.visualization.PieChart(document.getElementById('food_chart'));
+  var chart = new google.visualization.PieChart(document.getElementById('api_test_chart'));
   
-  // This line draws the chart using the data and options designated above
   chart.draw(data, options);
 }

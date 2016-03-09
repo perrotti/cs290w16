@@ -60,21 +60,21 @@ app.get('/apitest', function(req, res, next) {
       input.six = Number(temp).toFixed(2);
       
       // Format all of the variables into the style that Google Charts needs
-      input.chartData = [];
+      input.chartdata = [];
       var arr = [input.one, 'Stock Price'];
-      input.chartData.push(arr);
+      input.chartdata.push(arr);
       arr = ['Year Low', input.two];
-      input.chartData.push(arr);
+      input.chartdata.push(arr);
       arr = ['Day Low', input.three];
-      input.chartData.push(arr);
+      input.chartdata.push(arr);
       arr = ['Price', input.four];
-      input.chartData.push(arr);
+      input.chartdata.push(arr);
       arr = ['Day Hight', input.five];
-      input.chartData.push(arr);
+      input.chartdata.push(arr);
       arr = ['Year High', input.six];
-      input.chartData.push(arr);
+      input.chartdata.push(arr);
       
-      input.seven = input.chartData;
+      input.seven = input.chartdata;
       
       res.render('apitest', input);
     } else {
