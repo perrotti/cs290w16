@@ -35,7 +35,7 @@ app.get('/basicsyntax', function(req, res, next) {
 
 app.get('/apitest', function(req, res, next) {
   var input = {};
-  request(http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json&view=detail, function(err, response, body) {
+  request('http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json&view=detail', function(err, response, body) {
     if(!err && response.statusCode < 400) {
       var info = JSON.parse(body);
       input.one = info;
