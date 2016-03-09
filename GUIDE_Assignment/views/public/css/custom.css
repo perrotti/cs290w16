@@ -1,7 +1,6 @@
 .googleHeaderCell {}
 
-#pick-up{ 
-  display: block;
+#pick_up{ 
   margin: 0 auto !important;
   margin-left: auto;
   margin-right: auto;

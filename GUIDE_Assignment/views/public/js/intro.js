@@ -21,6 +21,6 @@ function drawChart() {
                  cssClassNames: {headerCell: 'googleHeaderCell'}};
 
   // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.ColumnChart(document.getElementById('pick-up'));
+  var chart = new google.visualization.ColumnChart(document.getElementById('pick_up'));
   chart.draw(data, options);
 }
