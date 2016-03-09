@@ -22,6 +22,7 @@ app.get('/', function(req, res, next) {
 app.get('/intro', function(req, res, next) {
   var input = {};
   input.javascriptfile = "/js/intro.js";
+  input.chartdata = "Blue";
   res.render('intro', input);
 });
 
