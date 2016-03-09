@@ -43,16 +43,12 @@ app.get('/apitest', function(req, res, next) {
       input.three = info.list.resources;
       input.four = info.list.resources[0].resource;
       input.five = info.list.resources[0].resource.fields.name;
-      input.six = info.list.resources[0].resource.fields.year_low;
-      input.six = input.six.toFixed(2);
+      var temp = info.list.resources[0].resource.fields.year_low;
+      input.six = temp.toFixed(2);
       input.seven = info.list.resources[0].resource.fields.day_low;
-      input.seven = input.seven.toFixed(2);
       input.eight = info.list.resources[0].resource.fields.price;
-      input.eight = input.eight.toFixed(2);
       input.nine = info.list.resources[0].resource.fields.day_high;
-      input.nine = input.nine.toFixed(2);
       input.ten = info.list.resources[0].resource.fields.year_high;
-      input.ten = input.ten.toFixed(2);
       res.render('apitest', input);
     } else {
       if(response) {
