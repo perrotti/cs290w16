@@ -16,6 +16,7 @@ var weatherKey = "b65bd77d0451298f757069747d71a4de";
 app.get('/', function(req, res, next) {
   var input = {};
   input.javascriptfile = "/js/intro.js";
+  input.chartdata = "Blue";
   res.render('intro', input);
 });
 

@@ -27,7 +27,7 @@ function drawChart() {
   var options = {title:'Places I Have Eaten Lunch This Month',
                  width:500,   // Width of chart
                  height:500,  // Height of chart
-                 backgroundColor: {strokeWidth:3}  // Put a border around the chart
+                 backgroundColor: {strokeWidth:3}}  // Put a border around the chart
 
   /* This line does several things:
   1) Creates a Google Chart and assigns it to a variable
