@@ -25,8 +25,8 @@ function drawChart() {
 
   // Set options for how the chart will be displayed
   var options = {title:'Places I Have Eaten Lunch This Month',
-                 width:400px,   // Width of chart
-                 height:400px,  // Height of chart
+                 width:400,   // Width of chart
+                 height:400,  // Height of chart
                  backgroundColor: {strokeWidth:3}}  // Put a border around the chart
 
   /* This line does several things:
