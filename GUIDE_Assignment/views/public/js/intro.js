@@ -19,7 +19,7 @@ function drawChart() {
   var options = {title:'Pick Up Line Success Rate (%)',
                  width:800,
                  height:500,
-                 bars: 'vertical'
+                 bars: 'vertical',
                  legend: {position: 'top'},
                  colors: ['#990000', '#ff3333', '#ff9999']};
 
