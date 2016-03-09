@@ -36,8 +36,7 @@
       <div id="pick-up">
       </div>
       <p>And just in case you wanted to see the javascript underlying this chart... (HOW SIMPLE!)</p>
-      <pre class="prettyprint lang-html linenums">
-        <script>
+      <pre class="prettyprint lang-js linenums">
           google.charts.load('current', {packages: ['corechart']});
           google.charts.setOnLoadCallback(drawChart);
 
@@ -57,7 +56,6 @@
             var chart = new google.visualization.ColumnChart(document.getElementById('pick-up'));
             chart.draw(data, options);
           }
-        </script>
       </pre>
     </div>
   </div>
