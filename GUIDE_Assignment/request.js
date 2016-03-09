@@ -56,6 +56,17 @@ app.get('/apitest', function(req, res, next) {
       temp = info.list.resources[0].resource.fields.year_high;
       input.six = Number(temp).toFixed(2);
       
+      input.chartArray = [
+        [input.one, 'Stock Price'],
+        ['Year Low', input.two],
+        ['Day Low', input.three],
+        ['Price', input.four],
+        ['Day Hight', input.five],
+        ['Year High', input.six]
+      ];
+      
+      input.seven = input.chartArray;
+      
       res.render('apitest', input);
     } else {
       if(response) {
