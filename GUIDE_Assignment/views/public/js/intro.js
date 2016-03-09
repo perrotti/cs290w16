@@ -1,3 +1,7 @@
+// Basic chart preperation files
+google.charts.load('current', {packages: ['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
 // Function creates data, chart options, and draws chart
 function drawChart() {
 
