@@ -45,7 +45,8 @@ app.get('/apitest', function(req, res, next) {
       input.five = info.list.resources[0].resource.fields.name;
       var temp = info.list.resources[0].resource.fields.year_low;
       input.six = Number(temp).toFixed(2);
-      input.seven = info.list.resources[0].resource.fields.day_low;
+      temp = info.list.resources[0].resource.fields.day_low;
+      input.seven = Number(temp).toFixed(2);
       input.eight = info.list.resources[0].resource.fields.price;
       input.nine = info.list.resources[0].resource.fields.day_high;
       input.ten = info.list.resources[0].resource.fields.year_high;
