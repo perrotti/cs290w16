@@ -1,15 +1,7 @@
-/* Basic chart preperation files that must be included. 
-For different chart types additional packages must be added.
-For older versions of Google Chart releases, 'current' must be changed */
 google.charts.load('current', {packages: ['corechart']});
 
-/* This defines the "call back" function once the page loads
-Change drawChart to the function you create */
 google.charts.setOnLoadCallback(drawChart);
 
-/* This controls all of the main functionality of the chart. 
-You will organize your data, select your chart options, and draw 
-the chart using this function */
 function drawChart() {
 
   // Create the data you want to include in your chart
