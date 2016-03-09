@@ -35,10 +35,13 @@ app.get('/basicsyntax', function(req, res, next) {
 
 app.get('/apitest', function(req, res, next) {
   var input = {};
+  input.javascriptfile = "/js/apitest.js";
   request('http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json&view=detail', function(err, response, body) {
     if(!err && response.statusCode < 400) {
+      // Parse returned content
       var info = JSON.parse(body);
       
+      // Parse out the fields that we want to variables
       input.one = info.list.resources[0].resource.fields.name;
       
       var temp = info.list.resources[0].resource.fields.year_low;
@@ -56,7 +59,8 @@ app.get('/apitest', function(req, res, next) {
       temp = info.list.resources[0].resource.fields.year_high;
       input.six = Number(temp).toFixed(2);
       
-      input.chartArray = [
+      // Format all of the variables into the style that Google Charts needs
+      input.chartData = [
         [input.one, 'Stock Price'],
         ['Year Low', input.two],
         ['Day Low', input.three],
@@ -65,7 +69,7 @@ app.get('/apitest', function(req, res, next) {
         ['Year High', input.six]
       ];
       
-      input.seven = input.chartArray;
+      input.seven = input.chartData;
       
       res.render('apitest', input);
     } else {
