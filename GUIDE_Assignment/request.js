@@ -42,40 +42,14 @@ app.get('/apitest', function(req, res, next) {
       var info = JSON.parse(body);
       
       // Parse out the fields that we want to variables
-      input.one = info.list.resources[0].resource.fields.name;
-      
-      var temp = info.list.resources[0].resource.fields.year_low;
-      input.two = Number(temp).toFixed(2);
-      
-      temp = info.list.resources[0].resource.fields.day_low;
-      input.three = Number(temp).toFixed(2);
-      
+      input.title = info.list.resources[0].resource.fields.name;
+      var temp = info.list.resources[0].resource.fields.day_low;
+      input.low = Number(temp).toFixed(2);
       temp = info.list.resources[0].resource.fields.price;
-      input.four = Number(temp).toFixed(2);
-      
+      input.price = Number(temp).toFixed(2);
       temp = info.list.resources[0].resource.fields.day_high;
-      input.five = Number(temp).toFixed(2);
-      
-      temp = info.list.resources[0].resource.fields.year_high;
-      input.six = Number(temp).toFixed(2);
-      
-      // Format all of the variables into the style that Google Charts needs
-      input.chartdata = [];
-      var arr = [input.one, 'Stock Price'];
-      input.chartdata.push(arr);
-      arr = ['Year Low', input.two];
-      input.chartdata.push(arr);
-      arr = ['Day Low', input.three];
-      input.chartdata.push(arr);
-      arr = ['Price', input.four];
-      input.chartdata.push(arr);
-      arr = ['Day Hight', input.five];
-      input.chartdata.push(arr);
-      arr = ['Year High', input.six];
-      input.chartdata.push(arr);
-      
-      input.seven = input.chartdata;
-      
+      input.high = Number(temp).toFixed(2);
+
       res.render('apitest', input);
     } else {
       if(response) {
