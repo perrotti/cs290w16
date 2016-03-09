@@ -23,46 +23,49 @@
       the big picture before we break down each individual piece.</p>
       <h3 class="sub-header">Javascript to be placed in HTML header</h3>
       <pre class="prettyprint lang-js linenums">
-        /* Basic chart preperation files that must be included. 
-        For different chart types additional packages must be added.
-        For older versions of Google Chart releases, 'current' must be changed */
-        google.charts.load('current', {packages: ['corechart']});
+        &ltscript type="text/javascript" src="https://www.gstatic.com/charts/loader.js"&gt&lt/script&gt
+        &ltscript&gt
+          /* Basic chart preperation files that must be included. 
+          For different chart types additional packages must be added.
+          For older versions of Google Chart releases, 'current' must be changed */
+          google.charts.load('current', {packages: ['corechart']});
 
-        /* This defines the "call back" function once the page loads
-        Change drawChart to the function you create */
-        google.charts.setOnLoadCallback(drawChart);
+          /* This defines the "call back" function once the page loads
+          Change drawChart to the function you create */
+          google.charts.setOnLoadCallback(drawChart);
 
-        /* This controls all of the main functionality of the chart. 
-        You will organize your data, select your chart options, and draw 
-        the chart using this function */
-        function drawChart() {
+          /* This controls all of the main functionality of the chart. 
+          You will organize your data, select your chart options, and draw 
+          the chart using this function */
+          function drawChart() {
 
-          // Create the data you want to include in your chart
-          var data = new google.visualization.arrayToDataTable([
-            ['Restaurant', 'Count'],
-            ['Tutta Bella', 1],
-            ['Sushi Mio', 3],
-            ['Chipotle', 7],
-            ['Thai Truck', 5],
-            ['Jimmy Johns', 2],
-            ['Chic-fil-a', 11]
-          ]);
+            // Create the data you want to include in your chart
+            var data = new google.visualization.arrayToDataTable([
+              ['Restaurant', 'Count'],
+              ['Tutta Bella', 1],
+              ['Sushi Mio', 3],
+              ['Chipotle', 7],
+              ['Thai Truck', 5],
+              ['Jimmy Johns', 2],
+              ['Chic-fil-a', 11]
+            ]);
 
-          // Set options for how the chart will be displayed
-          var options = {title:'Places I Have Eaten Lunch This Month',
-                         width:450,   // Width of chart
-                         height:300,  // Height of chart
-                         backgroundColor: {strokeWidth:3}}  // Put a border around the chart
+            // Set options for how the chart will be displayed
+            var options = {title:'Places I Have Eaten Lunch This Month',
+                           width:450,   // Width of chart
+                           height:300,  // Height of chart
+                           backgroundColor: {strokeWidth:3}}  // Put a border around the chart
 
-          /* This line does several things:
-          1) Creates a Google Chart and assigns it to a variable
-          2) Designates the chart type (PieChart in this case)
-          3) Indicates which HTML element will display the chart (food_chart in this case) */
-          var chart = new google.visualization.PieChart(document.getElementById('food_chart'));
-          
-          // This line draws the chart using the data and options designated above
-          chart.draw(data, options);
-        }
+            /* This line does several things:
+            1) Creates a Google Chart and assigns it to a variable
+            2) Designates the chart type (PieChart in this case)
+            3) Indicates which HTML element will display the chart (food_chart in this case) */
+            var chart = new google.visualization.PieChart(document.getElementById('food_chart'));
+            
+            // This line draws the chart using the data and options designated above
+            chart.draw(data, options);
+          }
+        &/ltscript&gt
       </pre>
       <h3 class="sub-header">HTML needed in body (really, that is it)</h3>
       <pre class="prettyprint lang-html linenums">
@@ -71,16 +74,23 @@
       </pre>
       <h2 class="sub-header">Breaking Down the Code</h2>
       <h3 class="sub-header">Loading the Google Chart API</h3>
-      <p>The first step to creating a Google Chart image is loading the API. There are two lines 
+      <p>The first step to creating a Google Chart image is loading the API. There are three lines 
       that must be included in the header file of your HTML to make this possible.</p>
       <pre class="prettyprint lang-js linenums">
-        // Loads the Google Chart API
-        google.charts.load('current', {packages: ['corechart']});
+        // Import basic Google Chart loader script
+        &ltscript type="text/javascript" src="https://www.gstatic.com/charts/loader.js"&gt&lt/script&gt
+        &ltscript&gt
+          // Loads the Google Chart API
+          google.charts.load('current', {packages: ['corechart']});
 
-        // Define call back function once page loads
-        google.charts.setOnLoadCallback(drawChart);
+          // Define call back function once page loads
+          google.charts.setOnLoadCallback(drawChart);
+        &lt/script&gt
       </pre>
-      <p>The first line above loads the core Google Chart functionality. It defines which packages
+      <p>The first line above brings in the loader for google charts. There isn't much we can modify
+      here, but ensure that it is in your HTML header file, before the primary Google Chart script
+      that you will be heavily modifying</p>
+      <p>The second line above loads the core Google Chart functionality. It defines which packages
       we want (which controls which charts will be available to us), and also informs Google which
       version we are looking for.</p> 
       <p>We can modify the charts available to us by adding additional packages. We can also modify
@@ -90,7 +100,7 @@
       <pre class="prettyprint lang-js linenums">
         google.charts.load('42', {packages: ['corechart', 'tables']});
       </pre>
-      <p>The second line in the code snippet indicates the function that should be run after the chart
+      <p>The third line in the code snippet indicates the function that should be run after the chart
       is loaded. The only modification here is changing the function passed into the formula. Make sure
       this matches the function you write from the next section</p>
       <h3 class="sub-header">Creating the Call Back Function</h3>
@@ -149,7 +159,7 @@
       the options we specified, and actually creates the chart. After this line is executed, the chart will appear in the specified
       HTML element.</p>
       <pre class="prettyprint lang-js linenums">
-        /* Chart variable creation
+        // Chart variable creation
         var chart = new google.visualization.PieChart(document.getElementById('food_chart'));
         
         // Draw chart using data and options
