@@ -12,7 +12,7 @@ function drawChart() {
     ['High', dataFour]
   ]);
 
-  var options = {title:dataOne + 'Places Stock Price',
+  var options = {title:dataOne + ' Stock Price',
                  width:450,   // Width of chart
                  height:450,  // Height of chart
                  backgroundColor: {strokeWidth:3}}  // Put a border around the chart

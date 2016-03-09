@@ -33,15 +33,17 @@ app.get('/basicsyntax', function(req, res, next) {
   res.render('basicsyntax', input);
 });
 
-app.get('/apitest', function(req, res, next) {
+app.get('/api', function(req, res, next) {
   var input = {};
-  input.javascriptfile = "/js/apitest.js";
+  // Provide the javascript file to reference
+  input.javascriptfile = "/js/api.js";
   request('http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json&view=detail', function(err, response, body) {
     if(!err && response.statusCode < 400) {
       // Parse returned content
       var info = JSON.parse(body);
       
       // Parse out the fields that we want to variables
+      // Number() and toFixed() used to create two decimal point number
       input.one = info.list.resources[0].resource.fields.name;
       var temp = info.list.resources[0].resource.fields.day_low;
       input.two = Number(temp).toFixed(2);
@@ -50,7 +52,8 @@ app.get('/apitest', function(req, res, next) {
       temp = info.list.resources[0].resource.fields.day_high;
       input.four = Number(temp).toFixed(2);
 
-      res.render('apitest', input);
+      // Render the page using the provided inputs
+      res.render('api', input);
     } else {
       if(response) {
        console.log(response.statusCode);
