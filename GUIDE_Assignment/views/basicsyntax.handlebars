@@ -21,7 +21,7 @@
       <h2 class="sub-header">Underlying Code</h2>
       <p>I'm going to start by providing all of the code used to produce the chart above. It's good to see 
       the big picture before we break down each individual piece.</p>
-      <h4 class="sub-header">Javascript to be placed in HTML header</h4>
+      <h3 class="sub-header">Javascript to be placed in HTML header</h3>
       <pre class="prettyprint lang-js linenums">
         /* Basic chart preperation files that must be included. 
         For different chart types additional packages must be added.
@@ -64,13 +64,13 @@
           chart.draw(data, options);
         }
       </pre>
-      <h4 class="sub-header">HTML needed in body (really, that is it)</h4>
+      <h3 class="sub-header">HTML needed in body (really, that is it)</h3>
       <pre class="prettyprint lang-html linenums">
         &ltdiv id="food_chart"&gt
         &lt/div&gt
       </pre>
       <h2 class="sub-header">Breaking Down the Code</h2>
-      <h4 class="sub-header">Loading the Google Chart API</h4>
+      <h3 class="sub-header">Loading the Google Chart API</h3>
       <p>The first step to creating a Google Chart image is loading the API. There are two lines 
       that must be included in the header file of your HTML to make this possible.</p>
       <pre class="prettyprint lang-js linenums">
@@ -93,7 +93,7 @@
       <p>The second line in the code snippet indicates the function that should be run after the chart
       is loaded. The only modification here is changing the function passed into the formula. Make sure
       this matches the function you write from the next section</p>
-      <h4 class="sub-header">Creating the Call Back Function</h4>
+      <h3 class="sub-header">Creating the Call Back Function</h3>
       <p>Now that we have taken care of the basic Google Chart API code, we can get into the meat that 
       really controls what the chart looks like. There are three main portions to this code:<p>
       <ul>
@@ -101,7 +101,7 @@
         <li>Options</li>
         <li>Chart Creation and Draw Function</li>
       </ul>
-      <h5 class="sub-header">Data</h5>
+      <h4 class="sub-header">Data</h4>
       <p>The data portion of the code creates a variable that stores the data for the chart. There are 
       multiple ways to pass data to this variable, but we will focus on the method where it is provided
       as an array of arrays. The inner arrays contain the data for each line of a <q>table.</q> The first
@@ -119,7 +119,7 @@
         ]);
       </pre>
       
-      <h5 class="sub-header">Options</h5>
+      <h4 class="sub-header">Options</h4>
       <p>Options are where you get to take control of your chart! This is the most important section for styling
       your chart. Think of it as the CSS of Google Charts (a lot of the naming conventions are similair).The four
       major things you will almost always want to style are the title of the chart, the width, the height, and the
@@ -134,7 +134,7 @@
                        backgroundColor: {strokeWidth:3}}  // Put a border around the chart
 
       </pre>
-      <h5 class="sub-header">Chart Creation and Draw Function</h5>
+      <h4 class="sub-header">Chart Creation and Draw Function</h4>
       <p>The final step is to actually draw the chart (yay!!!). The first line creates a new google chart, and
       indicates two key paramaters:</p>
       <ol>
@@ -155,7 +155,7 @@
         // Draw chart using data and options
         chart.draw(data, options);
       </pre>
-      <h2 class="sub-header">Next Steps</h5>
+      <h2 class="sub-header">Next Steps</h2>
       <p>Now that you know how to create a basic chart, I suggest getting some practice modifying
       the data and options from the code snippit at the top of the page. Get a chart working
       and then change it to a barChart that is double the width and height for example. Get comfortable
