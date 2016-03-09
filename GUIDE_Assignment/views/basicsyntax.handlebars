@@ -134,55 +134,34 @@
                        backgroundColor: {strokeWidth:3}}  // Put a border around the chart
 
       </pre>
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      <p><a href="https://developers.google.com/chart/interactive/docs/">Google's Guide</a> provides details
-      on how to get Google Charts up and running, along with detailed explanations of all the features, options,
-      and chart types.</p>
-      <p>While this guide is going to provide the basic details of how to get a chart running in the first two 
-      sections (hopefully more succently than Google's documentation), the guide is primarily going to focus on 
-      two important areas:<p>
-      <ul>
-        <li><a href="/api">Charting API Data</a></li>
-        <li><a href="/interactive">Creating Interactive Charts</a></li>
-      </ul>
-      <p>This guide will also be created using Express, Express-Handlebars, Express-Request, and Express-Async. 
-      This adds further complexity beyond the client side calls the Google Chart API demonstrates. This will be 
-      useful for creating server side code that can leverage databases, APIs, and other non-client side generated
-      charts. Hopefully with the tools demonstrated in this guide you will be ready to create a workout dashboard,
-      finance application, or maybe even a pick-up line success tracker (see example chart below).</p>
-      <div id="basic_chart">
-      </div>
-      <p><br />And just in case you wanted to see the underlying javascript for this chart... (HOW SIMPLE!)</p>
+      <h5 class="sub-header">Chart Creation and Draw Function</h5>
+      <p>The final step is to actually draw the chart (yay!!!). The first line creates a new google chart, and
+      indicates two key paramaters:</p>
+      <ol>
+        <li>Chart Type: PieChart</li>
+        <li>HTML Target: food_chart</li>
+      </ol>
+      <p>The first item indicates the type of chart we are graphing. It could be a ColumnChart, a BarChart, 
+      or numerous other chart types detailed on <a href="https://developers.google.com/chart/interactive/docs/">Google's Guide</a>.
+      The second item indicates the HTML item we want to target as the container for our chart. As seen at the start of this page,
+      I've created a div with the ID food_chart that will hold our chart.</p>
+      <p>The last part of this code snippit contains the draw function. This function takes in the data we generated earlier, and 
+      the options we specified, and actually creates the chart. After this line is executed, the chart will appear in the specified
+      HTML element.</p>
       <pre class="prettyprint lang-js linenums">
-          google.charts.load('current', {packages: ['corechart']});
-          google.charts.setOnLoadCallback(drawChart);
-
-          function drawChart() {
-            var data = new google.visualization.arrayToDataTable([
-              ['Line', 'Percentage', {role: 'style'}],
-              ['Girl, you better have a license, cuz you are driving me crazy', 5, '#990000'],
-              ['If beauty were measured in seconds, you would be an hour!', 7, '#ff3333'],
-              ['Are you Sweadish? cuz you are the sweetish girl I have met!', 2, '#ff9999']
-            ]);
-
-            var options = {title:'Pick Up Line Success Rate (%)',
-                           width:800,
-                           height:600,
-                           backgroundColor: {strokeWidth:3},
-                           cssClassNames: {headerCell: 'googleHeaderCell'}};
-
-            var chart = new google.visualization.ColumnChart(document.getElementById('pick_up'));
-            chart.draw(data, options);
-          }
+        /* Chart variable creation
+        var chart = new google.visualization.PieChart(document.getElementById('food_chart'));
+        
+        // Draw chart using data and options
+        chart.draw(data, options);
       </pre>
+      <h2 class="sub-header">Next Steps</h5>
+      <p>Now that you know how to create a basic chart, I suggest getting some practice modifying
+      the data and options from the code snippit at the top of the page. Get a chart working
+      and then change it to a barChart that is double the width and height for example. Get comfortable
+      with the general chart format now, because it will get slightly more complicated once we incorporate
+      an API call in the next section<p>
+      <p><a href="/api">API Integration</a><p>
     </div>
   </div>
 </div>
