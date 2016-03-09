@@ -51,12 +51,8 @@
             var options = {title:'Pick Up Line Success Rate (%)',
                            width:600,
                            height:400,
-                           chartArea: {
-                             backgroundColor: {
-                               stroke: '#4322c0',
-                               strokeWidth: 3
-                               }
-                           },
+                           backgroundColor.stroke:'#666',
+                           backgroundColor.strokeWidth:3,
                            cssClassNames: {headerCell: 'googleHeaderCell'}};
 
             var chart = new google.visualization.ColumnChart(document.getElementById('pick-up'));
