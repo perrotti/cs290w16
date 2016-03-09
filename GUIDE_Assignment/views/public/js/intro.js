@@ -21,6 +21,7 @@ function drawChart() {
                  height:500,
                  bars: 'vertical',
                  legend: {position: 'top'},
+                 cssClassNames: {headerCell: 'googleHeaderCell'},
                  colors: ['#990000', '#ff3333', '#ff9999']};
 
   // Instantiate and draw our chart, passing in some options.
