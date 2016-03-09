@@ -35,7 +35,7 @@
       finance application, or maybe even a pick-up line success tracker (see example chart below).</p>
       <div id="pick-up">
       </div>
-      <p>And just in case you wanted to see the javascript underlying this chart... (HOW SIMPLE!)</p>
+      <p>And just in case you wanted to see the underlying javascript for this chart... (HOW SIMPLE!)</p>
       <pre class="prettyprint lang-js linenums">
           google.charts.load('current', {packages: ['corechart']});
           google.charts.setOnLoadCallback(drawChart);
@@ -49,8 +49,8 @@
             ]);
 
             var options = {title:'Pick Up Line Success Rate (%)',
-                           width:800,
-                           height:500,
+                           width:600,
+                           height:400,
                            cssClassNames: {headerCell: 'googleHeaderCell'}};
 
             var chart = new google.visualization.ColumnChart(document.getElementById('pick-up'));
