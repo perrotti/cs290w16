@@ -11,7 +11,7 @@ app.set('view engine', 'handlebars');
 app.set('port', 4960);
 app.use(express.static(__dirname + '/views/public'));
 
-var weatherKey = "b65bd77d0451298f757069747d71a4de";
+//var weatherKey = "b65bd77d0451298f757069747d71a4de";
  
 app.get('/', function(req, res, next) {
   var input = {};
@@ -35,11 +35,13 @@ app.get('/basicsyntax', function(req, res, next) {
 
 app.get('/apitest', function(req, res, next) {
   var input = {};
-  request('http://api.openweathermap.org/data/2.5/weather?q=seattle&APPID=' + key, function(err, response, body) {
+  request(http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json&view=detail, function(err, response, body) {
     if(!err && response.statusCode < 400) {
       var info = JSON.parse(body);
-      input.owm = info.main.temp;
-      res.render('weather-test', input);
+      input.one = info;
+      input.two = info.list;
+      input.three = info.list.resources;
+      res.render('apitest', input);
     } else {
       if(response) {
        console.log(response.statusCode);
@@ -47,7 +49,6 @@ app.get('/apitest', function(req, res, next) {
       next(err);
     }
   });
-  res.render('api', input);
 });
 
 app.use(function(req, res) {
