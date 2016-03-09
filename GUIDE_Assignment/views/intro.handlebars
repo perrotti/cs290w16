@@ -38,6 +38,8 @@
       </div>
       <p><br />And just in case you wanted to see the underlying javascript for this chart... (HOW SIMPLE!)</p>
       <pre class="prettyprint lang-js linenums">
+        &ltscript type="text/javascript" src="https://www.gstatic.com/charts/loader.js"&gt&lt/script&gt
+        &ltscript&gt 
           google.charts.load('current', {packages: ['corechart']});
           google.charts.setOnLoadCallback(drawChart);
 
@@ -58,6 +60,7 @@
             var chart = new google.visualization.ColumnChart(document.getElementById('pick_up'));
             chart.draw(data, options);
           }
+        &lt/script&gt
       </pre>
     </div>
   </div>

@@ -65,7 +65,7 @@
             // This line draws the chart using the data and options designated above
             chart.draw(data, options);
           }
-        &/ltscript&gt
+        &lt/script&gt
       </pre>
       <h3 class="sub-header">HTML needed in body (really, that is it)</h3>
       <pre class="prettyprint lang-html linenums">
@@ -85,6 +85,9 @@
 
           // Define call back function once page loads
           google.charts.setOnLoadCallback(drawChart);
+          
+          // Rest of the code we will cover shortly
+          ...
         &lt/script&gt
       </pre>
       <p>The first line above brings in the loader for google charts. There isn't much we can modify
