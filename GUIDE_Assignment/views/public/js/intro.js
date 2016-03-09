@@ -15,8 +15,8 @@ function drawChart() {
 
   // Set chart options
   var options = {title:'Pick Up Line Success Rate (%)',
-                 width:800,
-                 height:600,
+                 width:400,
+                 height:400,
                  backgroundColor: {strokeWidth:3},
                  cssClassNames: {headerCell: 'googleHeaderCell'}};
 
