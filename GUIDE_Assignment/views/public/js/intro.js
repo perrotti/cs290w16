@@ -17,11 +17,12 @@ function drawChart() {
 
   // Set chart options
   var options = {title:'Pick Up Line Success Rate (%)',
-                 width:600,
+                 width:800,
                  height:500,
+                 legend: {position: top},
                  colors: ['#990000', '#ff3333', '#ff9999']};
 
   // Instantiate and draw our chart, passing in some options.
-  var chart = new google.visualization.BarChart(document.getElementById('pick-up'));
+  var chart = new google.visualization.ColumnChart(document.getElementById('pick-up'));
   chart.draw(data, options);
 }
