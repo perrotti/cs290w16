@@ -18,8 +18,9 @@
       the simple pie chart displayed below.</p>
       <div id="food_chart">
       </div>
-      <h2 class="sub-header">Breaking Down the Code</h2>
-      <p>I'm going to start by providing all of the code used to produce the chart above.</p>
+      <h2 class="sub-header">Underlying Code</h2>
+      <p>I'm going to start by providing all of the code used to produce the chart above. It's good to see 
+      the big picture before we break down each individual piece.</p>
       <h4 class="sub-header">Javascript to be placed in HTML header</h4>
       <pre class="prettyprint lang-js linenums">
         /* Basic chart preperation files that must be included. 
@@ -68,6 +69,79 @@
         &ltdiv id="food_chart"&gt
         &lt/div&gt
       </pre>
+      <h2 class="sub-header">Breaking Down the Code</h2>
+      <h4 class="sub-header">Loading the Google Chart API</h4>
+      <p>The first step to creating a Google Chart image is loading the API. There are two lines 
+      that must be included in the header file of your HTML to make this possible.</p>
+      <pre class="prettyprint lang-js linenums">
+        // Loads the Google Chart API
+        google.charts.load('current', {packages: ['corechart']});
+
+        // Define call back function once page loads
+        google.charts.setOnLoadCallback(drawChart);
+      </pre>
+      <p>The first line above loads the core Google Chart functionality. It defines which packages
+      we want (which controls which charts will be available to us), and also informs Google which
+      version we are looking for.</p> 
+      <p>We can modify the charts available to us by adding additional packages. We can also modify
+      the version number of our charts (Google updates the styling periodically), which will ensure
+      the charts don't change style over time. A Google Chart loading line that hard codes the version
+      number and requests access to corecharts and tables, would appear as follows:</p>
+      <pre class="prettyprint lang-js linenums">
+        google.charts.load('42', {packages: ['corechart', 'tables']});
+      </pre>
+      <p>The second line in the code snippet indicates the function that should be run after the chart
+      is loaded. The only modification here is changing the function passed into the formula. Make sure
+      this matches the function you write from the next section</p>
+      <h4 class="sub-header">Creating the Call Back Function</h4>
+      <p>Now that we have taken care of the basic Google Chart API code, we can get into the meat that 
+      really controls what the chart looks like. There are three main portions to this code:<p>
+      <ul>
+        <li>Data</li>
+        <li>Options</li>
+        <li>Chart Creation and Draw Function</li>
+      </ul>
+      <h5 class="sub-header">Data</h5>
+      <p>The data portion of the code creates a variable that stores the data for the chart. There are 
+      multiple ways to pass data to this variable, but we will focus on the method where it is provided
+      as an array of arrays. The inner arrays contain the data for each line of a <q>table.</q> The first
+      inner array contains the header information, which is essentially the name of the data that will follow.
+      The following inner arrays contain the data that should be graphed (the elements that make up your content).
+      An example of a data variable decleration is seen below. Notice that the first inner array contains the 
+      header information for the data ('Video Game' and 'Sales').</p>
+      <pre class="prettyprint lang-js linenums">
+        // Create the data you want to include in your chart
+        var data = new google.visualization.arrayToDataTable([
+          ['Video Game', 'Sales'],
+          ['Halo 5', 121],
+          ['The Division', 56],
+          ['Gears of War X', 27],
+        ]);
+      </pre>
+      
+      <h5 class="sub-header">Options</h5>
+      <p>Options are where you get to take control of your chart! This is the most important section for styling
+      your chart. Think of it as the CSS of Google Charts (a lot of the naming conventions are similair).The four
+      major things you will almost always want to style are the title of the chart, the width, the height, and the
+      border style. The code below shows the syntax for creating those four options. They are name-value pairs 
+      seperated by commas. You will almost always want to specify the width and height of your chart so that it
+      fits naturally in the space you want it to, and properly displays text (if too small, it will truncate text).</p>
+      <pre class="prettyprint lang-js linenums">
+        // Set options for how the chart will be displayed
+        var options = {title:'Places I Have Eaten Lunch This Month',
+                       width:450,   // Width of chart
+                       height:300,  // Height of chart
+                       backgroundColor: {strokeWidth:3}}  // Put a border around the chart
+
+      </pre>
+      
+      
+      
+      
+      
+      
+      
+      
       
       <p><a href="https://developers.google.com/chart/interactive/docs/">Google's Guide</a> provides details
       on how to get Google Charts up and running, along with detailed explanations of all the features, options,
