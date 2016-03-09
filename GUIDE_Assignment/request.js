@@ -63,7 +63,7 @@ app.get('/apitest', function(req, res, next) {
       input.chartData = [];
       var arr = [input.one, 'Stock Price'];
       input.chartData.push(arr);
-      arr = [Year Low', input.two];
+      arr = ['Year Low', input.two];
       input.chartData.push(arr);
       arr = ['Day Low', input.three];
       input.chartData.push(arr);
