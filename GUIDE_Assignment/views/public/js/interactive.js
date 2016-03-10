@@ -13,7 +13,7 @@ var options = {title:'Chocolate M&Ms I Want to Eat',
                height:450,  // Height of chart
                // Necessary to create animations when changing values
                animation: {
-                  duration: 1000 // in ms
+                  duration: 1000, // in ms
                   easing: 'out' // Start fast then slow down on animation
                }
                vAxis: {minValue: 0, maxValue:500} // Fix the vertical axis range
