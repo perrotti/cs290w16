@@ -5,10 +5,10 @@ google.charts.setOnLoadCallback(drawChart);
 multiple times. These variables should stay constant unless modified by our buttons */
 var data = new google.visualization.arrayToDataTable([
   ['Candy Type', 'Candy Amount'],
-  ['M&Ms', 250]
+  ['Skittles', 250]
 ]);
 
-var options = {title:'Chocolate M&Ms I Want to Eat',
+var options = {title:'Skittles I Want to Eat',
                width:450,   // Width of chart
                height:450,  // Height of chart
                // Necessary to create animations when changing values
