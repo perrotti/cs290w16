@@ -92,7 +92,7 @@ app.get('/interactive', function(req, res, next) {
 app.get('/interactiveapi', function(req, res, next) {
   var input = {};
   // Provide the javascript file to reference
-  input.javascriptfile = "/js/api.js";
+  input.javascriptfile = "/js/interactiveapi.js";
   // Comma seperated stock tickers to retrieve multiple stock prices in one call
   request('http://finance.yahoo.com/webservice/v1/symbols/AAPL,GOOGL,AMZN/quote?format=json&view=detail', function(err, response, body) {
     if(!err && response.statusCode < 400) {
@@ -135,21 +135,3 @@ app.use(function(err, req, res, next) {
 app.listen(app.get('port'), function() {
   console.log('Express started on http://localhost:' + app.get('port') + '; press Ctrl-C to terminate.')
 });
-
-
-/*Code to parse YAHOO API INFORMATION
-Saved for reference
-
-var info = JSON.parse(body);
-input.one = info;
-input.two = info.list;
-input.three = info.list.resources;
-input.four = info.list.resources[0].resource;
-input.five = info.list.resources[0].resource.fields.name;
-var temp = info.list.resources[0].resource.fields.year_low;
-input.six = Number(temp).toFixed(2);
-temp = info.list.resources[0].resource.fields.day_low;
-input.seven = Number(temp).toFixed(2);
-input.eight = info.list.resources[0].resource.fields.price;
-input.nine = info.list.resources[0].resource.fields.day_high;
-input.ten = info.list.resources[0].resource.fields.year_high;*/
