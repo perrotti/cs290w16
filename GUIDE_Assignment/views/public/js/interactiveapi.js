@@ -40,7 +40,7 @@ function init() {
   }
 
   // Add listener that modifies chart value when Apple button clicked
-  upButton.onclick = function() {
+  appleButton.onclick = function() {
     // Check to make sure stock price isn't already this company
     if (data.getValue(0, 0) != 'AAPL') {
       // Set new price, new title, and company color
@@ -54,7 +54,7 @@ function init() {
   }
 
   // Add listener that modifies chart value when Google button clicked
-  downButton.onclick = function() {
+  googleButton.onclick = function() {
     // Check to make sure stock price isn't already this company
     if (data.getValue(0, 0) != 'GOOGL') {
       // Set new price, new title, and company color
@@ -68,7 +68,7 @@ function init() {
   }
   
   // Add listener that modifies chart value when Amazon button clicked
-  downButton.onclick = function() {
+  amazonButton.onclick = function() {
     // Check to make sure stock price isn't already this company
     if (data.getValue(0, 0) != 'AMZN') {
       // Set new price, new title, and company color
