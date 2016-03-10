@@ -23,10 +23,10 @@
     
     <!-- This code imports Google Chart APIs needed for each run of the program -->
     <script type="text/javascript">
-      var dataOne = '{{one}}';
-      var dataTwo = {{two}};
-      var dataThree = {{three}};
-      var dataFour = {{four}};
+      var dataOne = '{{one}}' || 0;
+      var dataTwo = {{two}} || 0;
+      var dataThree = {{three}} || 0;
+      var dataFour = {{four}} || 0;
     </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="{{javascriptfile}}">
