@@ -4,8 +4,8 @@ google.charts.setOnLoadCallback(drawChart);
 /* Moved data, options, button, and chart decleration outside of drawChart, because drawChart will be called 
 multiple times. These variables should stay constant unless modified by our buttons */
 var data = new google.visualization.arrayToDataTable([
-  ['Candy Type', 'Candy Amount'],
-  ['Skittles', 250]
+  ['Candy', 'Price'],
+  ['Price Low', 250]
 ]);
 
 var options = {title:'Skittles I Want to Eat',
