@@ -14,11 +14,13 @@
       <p>To make Google Charts truly useful, you need to bring in some data (nobody wants to 
       hard code a website constantly). In this section we are going to run through an example
       using the Yahoo Stock API. This API doesn't have very good documentation (really none at all),
-      so several of my code snippits will be explaining how it works so you understand what is taking
-      place via Node.js and Express</p>
+      so some of my guide will be explaining how it works at a high level.</p>
       <h2 class="page-header">Retrieving the API Information</h2>
-      <p>The code snippit below is the entire .get function in Express that calls the Yahoo API, and formats
-      the data that will be passed to Google Charts</p>
+      <p>The code snippit below is the entire function in Express that calls the Yahoo API, and formats
+      the data that will be passed to Google Charts. I'm assuming you have a reasonable level of knowledge
+      when it comes to <a href="http://howtonode.org/deploy-blog-to-heroku">Node.js</a> and 
+      <a href="http://expressjs.com/en/guide/routing.html">Express</a>, so I will only be focusing on the 
+      non boiler-plate code.</p>
       <pre class="prettyprint lang-js linenums">
         app.get('/api', function(req, res, next) {
           var input = {};
@@ -50,45 +52,26 @@
           });
         });
       </pre>
+      <p>Not a lot of code, right? Well I'm going to break down the important parts by line number in the list below:<p>
+      <ul>
+        <li>Line 2: The input object will store the items passed to Google Charts.</li>
+        <li>Line 8: We parse the JSON information provided in the body that the API returns.</li>
+        <li>Line 12: We assign "input.one" the value of the name field returned by the Yahoo Stock API. This is the stock name.</li>
+        <li>Line 13-14: We retrieve the daily low price of the stock and assign it to a temporary variable. This temporary 
+            variable is then converted to a number with two decimal places, using Number() and .toFixed(2). This is then stored
+            in "input.two."</li>
+        <li>Line 15-16: Perform the same task as above, but store the current price in "input.three."</li>
+        <li>Line 17-18: Perform the same task as above, but store the daily high price in "input.four."</li>
+        <li>Line 21: Render the API page by passing in the input variable we just populated in the lines above.</li>
+      </ul>
+      <p>Woah! That was a lot of parsing. You can view the underlying JSON I'm parsing by vising this URL:
+      <a href="http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json&view=detail">
+      http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json&view=detail</a>. Now that we have organized
+      our input data into a format that we can reference by our page, we are going to take a look at how that information
+      is being passed to the Google Charts API.</p>
       
-      
-      
-      <pre class="prettyprint lang-js linenums">
-        {
-          "list" : { 
-            "meta" : { 
-                "type" : "resource-list",
-                "start" : 0,
-                "count" : 1
-            },
-            "resources" : [ 
-              {
-                "resource" : { 
-                  "classname" : "Quote",
-                  "fields" : { 
-                    "change" : "-0.059998",
-                    "chg_percent" : "-0.059386",
-                    "day_high" : "101.580002",
-                    "day_low" : "100.279999",
-                    "issuer_name" : "Apple Inc.",
-                    "issuer_name_lang" : "Apple Inc.",
-                    "name" : "Apple Inc.",
-                    "price" : "100.970001",
-                    "symbol" : "AAPL",
-                    "ts" : "1457556603",
-                    "type" : "equity",
-                    "utctime" : "2016-03-09T20:50:03+0000",
-                    "volume" : "23938780",
-                    "year_high" : "134.540000",
-                    "year_low" : "92.000000"
-                  }
-                }
-              }
-            ]
-          }
-        }
-      </pre>
-      <div id="api_test_chart"></div>
+      <h2 class="page-header">Retrieving the API Information</h2>
+      <div id="api_chart"></div>
     </div>
   </div>
 </div>

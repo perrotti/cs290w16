@@ -17,7 +17,7 @@ function drawChart() {
                  height:450,  // Height of chart
                  backgroundColor: {strokeWidth:3}}  // Put a border around the chart
 
-  var chart = new google.visualization.BarChart(document.getElementById('api_test_chart'));
+  var chart = new google.visualization.BarChart(document.getElementById('api_chart'));
   
   chart.draw(data, options);
 }
