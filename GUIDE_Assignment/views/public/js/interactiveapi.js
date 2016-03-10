@@ -4,7 +4,7 @@ google.charts.setOnLoadCallback(init);
 // Wrapped code in init() function. Called by the Google Charts call back function
 function init() {
   var data = new google.visualization.arrayToDataTable([
-    ['Stock Name', 'Count', { role: 'style' }],
+    ['Stock Name', 'Stock Price', { role: 'style' }],
     ['AAPL', dataTwo, 'silver']
   ]);
 

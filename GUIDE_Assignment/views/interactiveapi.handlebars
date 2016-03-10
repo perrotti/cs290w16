@@ -11,15 +11,161 @@
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
       <h1 class="page-header">Interactive API Example</h1>
-      <p>Now that we have charts that display information, what if we want to modify them? In this section we will
-      briefly look at how to create a chart that can be modified via a pair of buttons. One button will decrease
-      the size of our ColumnChart, while the other will grow it. We will also briefly touch on how these actions
-      can be animated, to provide a slick look to the UI.</p>
-
+      <p>Below you will find an example that combines all of the skills we have covered today. This chart takes in multiple points
+      of data from an API call, and populates the chart with a subset. You are then able to click on the buttons at the bottom of 
+      the chart to see the stock price for other companies. As before, I will run through the code below to point out the major
+      changes that took place to produce this chart.</p>
       <div id="interactiveapi_chart"></div>
       <button id="aapl">AAPL</button>
       <button id="googl">GOOGL</button>
       <button id="amzn">AMZN</button>
+      
+      <h2 class="page-header">Creating an Interactive API Chart</h2>
+      <h3 class="page-header">Creating an Interactive API Chart</h3>
+      <p>The HTML is largely similair to our last interactive chart example. We have simply added additional buttons and changed
+      the naming convention of them.</p>
+      <pre class="prettyprint lang-html linenums">
+        &ltdiv id="interactiveapi_chart"&gt&lt/div&gt
+        &ltbutton id="aapl"&gtAAPL&lt/button&gt
+        &ltbutton id="googl"&gtGOOGL&lt/button&gt
+        &ltbutton id="amzn"&gtAMZN&lt/button&gt
+      </pre>
+      
+      <h3 class="page-header">The Express Code</h3>
+      <p>The API call should look familair from before. The main change is that I have modified the API URL to include three stock 
+      names (comma delimited). This will return the same JSON object as before. Each of the stocks returned can be accessed by passing
+      a different value to the resources array. The values returned are then assigned to the input.dataTwo - input.dataFour variables,
+      the same as the original API call example.</p>
+      <pre class="prettyprint lang-js linenums">
+        app.get('/interactiveapi', function(req, res, next) {
+          var input = {};
+          // Provide the javascript file to reference
+          input.javascriptfile = "/js/interactiveapi.js";
+          // Comma seperated stock tickers to retrieve multiple stock prices in one call
+          request('http://finance.yahoo.com/webservice/v1/symbols/AAPL,GOOGL,AMZN/quote?format=json&view=detail', function(err, response, body) {
+            if(!err && response.statusCode < 400) {
+              // Parse returned content
+              var info = JSON.parse(body);
+              
+              // Parse out the stock prices we want
+              // Number() and toFixed() used to create two decimal point number
+              // Note resources array number is changed to access multiple stocks
+              input.one = "Text";
+              var temp = info.list.resources[0].resource.fields.price;
+              input.two = Number(temp).toFixed(2);
+              temp = info.list.resources[1].resource.fields.price;
+              input.three = Number(temp).toFixed(2);
+              temp = info.list.resources[2].resource.fields.day_high;
+              input.four = Number(temp).toFixed(2);
+
+              // Render the page using the provided inputs
+              res.render('interactiveapi', input);
+            } else {
+              if(response) {
+               console.log(response.statusCode);
+              }
+              next(err);
+            }
+          });
+        });
+      </pre>
+      
+      <h3 class="page-header">The Javascript</h3>
+      <p>The javascript should look very similair to the last interactive example. This time we have three onClick handlers, 
+      that update the color and name of the stock requested. They also incorporate an IF statement that checks to see if that
+      that stock is already being displayed. This was incorporated to avoid refreshing the chart without cause.</p>
+      <pre class="prettyprint lang-js linenums">
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(init);
+
+        // Wrapped code in init() function. Called by the Google Charts call back function
+        function init() {
+          var data = new google.visualization.arrayToDataTable([
+            ['Stock Name', 'Stock Price', { role: 'style' }],
+            ['AAPL', dataTwo, 'silver']
+          ]);
+
+          /* Moved data, options, button, and chart decleration outside of drawChart, because drawChart will be called 
+          multiple times. These variables should stay constant unless modified by our buttons */
+          var options = {title:'Interactive Stock Prices',
+                         width:450,   // Width of chart
+                         height:450,  // Height of chart
+                         // Necessary to create animations when changing values
+                         animation: {
+                            duration: 1000, // in ms
+                            easing: 'out' // Start fast then slow down on animation
+                         },
+                         backgroundColor: {strokeWidth:3}};  // Put a border around the chart
+
+          var chart = new google.visualization.ColumnChart(document.getElementById('interactiveapi_chart'));
+          var appleButton = document.getElementById('aapl');
+          var googleButton = document.getElementById('googl');
+          var amazonButton = document.getElementById('amzn');
+
+          function drawChart() {
+            // Can't push buttons while chart draws
+            appleButton.disable = true;
+            googleButton.disable = true;
+            amazonButton.disable = true;
+            // Listen for the chart to finish loading, then enable buttons
+            google.visualization.events.addListener(chart, 'ready', function() {
+              appleButton.disable = false;
+              googleButton.disable = false;
+              amazonButton.disable = false;
+            });
+            chart.draw(data, options);
+          }
+
+          // Add listener that modifies chart value when Apple button clicked
+          appleButton.onclick = function() {
+            // Check to make sure stock price isn't already this company
+            if (data.getValue(0, 0) != 'AAPL') {
+              // Set new price, new title, and company color
+              var newPrice = dataTwo;
+              data.setValue(0, 1, newPrice);
+              var newTitle = 'AAPL';
+              data.setValue(0, 0, newTitle);
+              data.setValue(0, 2, 'silver');
+              drawChart();
+            }
+          }
+
+          // Add listener that modifies chart value when Google button clicked
+          googleButton.onclick = function() {
+            // Check to make sure stock price isn't already this company
+            if (data.getValue(0, 0) != 'GOOGL') {
+              // Set new price, new title, and company color
+              var newPrice = dataThree;
+              data.setValue(0, 1, newPrice);
+              var newTitle = 'GOOGL';
+              data.setValue(0, 0, newTitle);
+              data.setValue(0, 2, 'blue');
+              drawChart();
+            }
+          }
+          
+          // Add listener that modifies chart value when Amazon button clicked
+          amazonButton.onclick = function() {
+            // Check to make sure stock price isn't already this company
+            if (data.getValue(0, 0) != 'AMZN') {
+              // Set new price, new title, and company color
+              var newPrice = dataFour;
+              data.setValue(0, 1, newPrice);
+              var newTitle = 'AMZN';
+              data.setValue(0, 0, newTitle);
+              data.setValue(0, 2, 'orange');
+              drawChart();
+            }
+          }
+
+          // Initial call to drawChart() when page loads
+          drawChart();
+        }
+      </pre>
+      
+      <h2 class="page-header">Conclusion</h2>
+      <p>Thank you for taking the time to review my How-to-Guide on Google Charts. Hopefully you now have the skills to go and
+      create robust, API driven charts that will add a layer of professionalism to your next website. :)</p>
     </div>
   </div>
 </div>
