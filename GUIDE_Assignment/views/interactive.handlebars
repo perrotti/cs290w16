@@ -99,12 +99,12 @@
         <li><strong>Line 2:</strong> The google charts call back function now points to the init() function instead of drawChart(). 
                     This is because we need to ensure the entire page is loaded, before we start declaring variables that impact 
                     the DOM (buttons). If we don't wait, the system will kick back errors when trying to produce the chart.</li>
-        <li><strong>Line 5:</strong> The init() function that not contains all of our chart code.</li>
+        <li><strong>Line 5:</strong> The init() function that contains most of our chart code.</li>
         <li><strong>Line 17-20:</strong> Several new options were added to the chart. These options enable animation when 
                     changing chart values. The animation style section in this code contains duration and easing. Duration is 
-                    in ms how long it will take for the chart to animate changes. Ease allows us to modify how the chart uses
-                    that time. In this case 'out' represents that it will start quickly then slow down as it reaches the new
-                    state.</li>
+                    in ms, and determines how long it will take for the chart to animate changes. Ease allows us to modify 
+                    how the chart uses that time. In this case 'out' represents that it will start quickly then slow down as 
+                    it reaches the new state.</li>
         <li><strong>Line 24-25:</strong> Created two variables that reference our up and down buttons from the HTML. These will
                     be used to react to a user clicking a button.</li>
         <li><strong>Line 29-30:</strong> Inside the drawChart function I have disabled the buttons. We don't want the buttons
