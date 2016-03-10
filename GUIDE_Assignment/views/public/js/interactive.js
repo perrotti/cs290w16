@@ -1,14 +1,15 @@
 google.charts.load('current', {packages: ['corechart']});
 google.charts.setOnLoadCallback(init);
 
-/* Moved data, options, button, and chart decleration outside of drawChart, because drawChart will be called 
-multiple times. These variables should stay constant unless modified by our buttons */
+// Wrapped code in init() function. Called by the Google Charts call back function
 function init() {
   var data = new google.visualization.arrayToDataTable([
     ['Candy', 'Count'],
     ['Skittles', 250]
   ]);
 
+  /* Moved data, options, button, and chart decleration outside of drawChart, because drawChart will be called 
+  multiple times. These variables should stay constant unless modified by our buttons */
   var options = {title:'Skittles I Want to Eat',
                  width:450,   // Width of chart
                  height:450,  // Height of chart
