@@ -93,7 +93,43 @@
           drawChart();
         }
       </pre>
+      <p>You can probably quickly pick out the differences between the static and interactive code, but we will walk through 
+      each line just to make sure it is obvious what is taking place.</p>
+      <ul>
+        <li><strong>Line 2:</strong> The google charts call back function now points to the init() function instead of drawChart(). 
+                    This is because we need to ensure the entire page is loaded, before we start declaring variables that impact 
+                    the DOM (buttons). If we don't wait, the system will kick back errors when trying to produce the chart.</li>
+        <li><strong>Line 5:</strong> The init() function that not contains all of our chart code.</li>
+        <li><strong>Line 17-20:</strong> Several new options were added to the chart. These options enable animation when 
+                    changing chart values. The animation style section in this code contains duration and easing. Duration is 
+                    in ms how long it will take for the chart to animate changes. Ease allows us to modify how the chart uses
+                    that time. In this case 'out' represents that it will start quickly then slow down as it reaches the new
+                    state.</li>
+        <li><strong>Line 24-25:</strong> Created two variables that reference our up and down buttons from the HTML. These will
+                    be used to react to a user clicking a button.</li>
+        <li><strong>Line 29-30:</strong> Inside the drawChart function I have disabled the buttons. We don't want the buttons
+                    reacting to clicks until the initial chart is created.</li>
+        <li><strong>Line 32-36:</strong> Google Charts has a built in listener that returns ready when a chart is loaded. Once
+                    this listener has been triggered, I'm enabling the buttons so that the user can start using them. I am then
+                    drawing the chart the same way we are used to.</li>
+        <li><strong>Line 40-46:</strong> This assigns a function to the up button upon being clicked. The IF statement checks to 
+                    ensure the chart value isn't outside the max bound (in this case, 10,000). If it's within the bound, it uses 
+                    data.getValue to retrieve the chart value and add 50 to it. It then uses data.setValue() to provide the new 
+                    data point to our original data array. (Side note: setValue and getValue operate by passing in array positions 
+                    for the values they want to change). Once this is complete, drawChart() is called, which will update the 
+                    chart with the new data.</li>
+        <li><strong>Line 49-55:</strong> This assigns a function to the down button upon being clicked. It works the same as the
+                    up button, except it has a floor of 0 instead of the ceiling of 10,000. It updates the data array with the 
+                    appropriate value then calls drawChart() to update the results.</li>
+        <li><strong>Line 58:</strong> This is the initial call to drawChart() that is called outside of the onClick actions. 
+                    This will ultimately call the function that creates the initial chart.</li>       
+      </ul>
       
+      <h3 class="page-header">The Finished Product</h3>
+      <p>Below is the chart that was produced using the code above. With the code from this page as an example, you now have the ability 
+      to modify your chart data in numerous ways. You could have one chart that serves the purpose of displaying data for multiple 
+      different items even! Wait... that sounds like a great idea! Continue to the next page to see an integration of the Yahoo Stock API
+      and Google Chart animations.</p>
       <div id="interactive_chart"></div>
       <button id="button_down">Down</button>
       <button id="button_up">Up</button>
