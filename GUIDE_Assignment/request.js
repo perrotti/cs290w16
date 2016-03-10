@@ -63,6 +63,12 @@ app.get('/api', function(req, res, next) {
   });
 });
 
+app.get('/interactive', function(req, res, next) {
+  var input = {};
+  input.javascriptfile = "/js/interactive.js";
+  res.render('interactive', input);
+});
+
 app.use(function(req, res) {
   res.status(404);
   res.render('404');
