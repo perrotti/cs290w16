@@ -89,6 +89,38 @@ app.get('/interactive', function(req, res, next) {
   res.render('interactive', input);
 });
 
+app.get('/interactiveapi', function(req, res, next) {
+  var input = {};
+  // Provide the javascript file to reference
+  input.javascriptfile = "/js/api.js";
+  // Comma seperated stock tickers to retrieve multiple stock prices in one call
+  request('http://finance.yahoo.com/webservice/v1/symbols/AAPL,GOOGL,AMZN/quote?format=json&view=detail', function(err, response, body) {
+    if(!err && response.statusCode < 400) {
+      // Parse returned content
+      var info = JSON.parse(body);
+      
+      // Parse out the stock prices we want
+      // Number() and toFixed() used to create two decimal point number
+      // Note resources array number is changed to access multiple stocks
+      input.one = "Text";
+      var temp = info.list.resources[0].resource.fields.price;
+      input.two = Number(temp).toFixed(2);
+      temp = info.list.resources[1].resource.fields.price;
+      input.three = Number(temp).toFixed(2);
+      temp = info.list.resources[2].resource.fields.day_high;
+      input.four = Number(temp).toFixed(2);
+
+      // Render the page using the provided inputs
+      res.render('interactiveapi', input);
+    } else {
+      if(response) {
+       console.log(response.statusCode);
+      }
+      next(err);
+    }
+  });
+});
+
 app.use(function(req, res) {
   res.status(404);
   res.render('404');
