@@ -15,6 +15,7 @@
       hard code a website constantly). In this section we are going to run through an example
       using the Yahoo Stock API. This API doesn't have very good documentation (really none at all),
       so some of my guide will be explaining how it works at a high level.</p>
+      
       <h2 class="page-header">Retrieving the API Information</h2>
       <p>The code snippit below is the entire function in Express that calls the Yahoo API, and formats
       the data that will be passed to Google Charts. I'm assuming you have a reasonable level of knowledge
@@ -54,24 +55,86 @@
       </pre>
       <p>Not a lot of code, right? Well I'm going to break down the important parts by line number in the list below:<p>
       <ul>
-        <li>Line 2: The input object will store the items passed to Google Charts.</li>
-        <li>Line 8: We parse the JSON information provided in the body that the API returns.</li>
-        <li>Line 12: We assign "input.one" the value of the name field returned by the Yahoo Stock API. This is the stock name.</li>
-        <li>Line 13-14: We retrieve the daily low price of the stock and assign it to a temporary variable. This temporary 
-            variable is then converted to a number with two decimal places, using Number() and .toFixed(2). This is then stored
-            in "input.two."</li>
-        <li>Line 15-16: Perform the same task as above, but store the current price in "input.three."</li>
-        <li>Line 17-18: Perform the same task as above, but store the daily high price in "input.four."</li>
-        <li>Line 21: Render the API page by passing in the input variable we just populated in the lines above.</li>
+        <li><strong>Line 2:</strong> The input object will store the items passed to Google Charts.</li>
+        <li><strong>Line 8:</strong> We parse the JSON information provided in the body that the API returns.</li>
+        <li><strong>Line 12:</strong> We assign "input.one" the value of the name field returned by the Yahoo Stock API. 
+                    This is the stock name.</li>
+        <li><strong>Line 13-14:</strong> We retrieve the daily low price of the stock and assign it to a temporary variable.
+                    This temporary variable is then converted to a number with two decimal places, using Number() and .toFixed(2).
+                    This is then stored in "input.two."</li>
+        <li><strong>Line 15-16:</strong> Perform the same task as above, but store the current price in "input.three."</li>
+        <li><strong>Line 17-18:</strong> Perform the same task as above, but store the daily high price in "input.four."</li>
+        <li><strong>Line 21:</strong> Render the API page by passing in the input variable we just populated in the lines above.</li>
       </ul>
-      <p>Woah! That was a lot of parsing. You can view the underlying JSON I'm parsing by vising this URL:
+      <p>Woah! That was a lot of parsing. You can view the underlying JSON I'm parsing by visiting this URL:
       <a href="http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json&view=detail">
       http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json&view=detail</a>. Now that we have organized
       our input data into a format that we can reference by our page, we are going to take a look at how that information
       is being passed to the Google Charts API.</p>
       
-      <h2 class="page-header">Retrieving the API Information</h2>
+      <h2 class="page-header">HTML Header Information</h2>
+      <p>Now that we have this <em>super fancy</em> data, we need to bring it into our HTML header file, so that Google Charts
+      can ultimately consume the data, and display a chart based on it. The code snippet below uses Express-Handlebars to accomplish
+      this, using the input data we created in the previous code snippet.</p> 
+      <pre class="prettyprint lang-html linenums">
+        &ltscript type="text/javascript"&gt
+          var dataOne = '{{one}}';
+          var dataTwo = {{two}};
+          var dataThree = {{three}};
+          var dataFour = {{four}};
+        &lt/script&gt
+        &ltscript type="text/javascript" src="https://www.gstatic.com/charts/loader.js"&gt&lt/script&gt
+        &ltscript type="text/javascript" src="googlechart.js"&gt
+      </pre>
+      <p>Once again, relatively simple to bring in the variables. We are simply assigning our input data to the javascript variables. 
+      I'm going to break down the important parts line by line though, just so we are on the same page.</p>
+      <ul>
+        <li><strong>Line 2:</strong> Assign input.one (stock name) to variable dataOne. Notice I used apostrophes around the 
+                    brackets because it is a string.</li>
+        <li><strong>Line 3-5:</strong> Assign the stock price variables to variables dataTwo - dataFour.</li>
+        <li><strong>Line 7:</strong> The standard Google Charts loader mentioned in the previous section</li>
+        <li><strong>Line 8:</strong> This is simply a proxy for the basic Google Chart javascript from the Basic Syntax section. 
+                    I simply put it in an external file. You can name your file whatever you want.</li>
+      </ul>
+      <p>As you can see, it is relatively easy to bring in the information from Express via Handlebars, and then assign it to 
+      variables that Google Charts can use. Now we will take a look at the javascript file named "googlechart.js"
+      that actually ingests our variables and populates a chart.</p>
+
+      <h2 class="page-header">Chart Data Javascript</h2>
+      <p>The code snippet below (which is linked to the header file via the googlechart.js file), uses the variables
+      declared earlier to populate the data table. All of the other elements are things you have seen before, so we 
+      will focus on lines 5-10.</p>
+      <pre class="prettyprint lang-js linenums">
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+          var data = new google.visualization.arrayToDataTable([
+            [dataOne, 'Price'],
+            ['Price Low', dataTwo],
+            ['Current Price', dataThree],
+            ['Price High', dataFour]
+          ]);
+
+          var options = {title:dataOne + ' Stock Price',
+                         width:450,   // Width of chart
+                         height:450,  // Height of chart
+                         backgroundColor: {strokeWidth:3}}  // Put a border around the chart
+
+          var chart = new google.visualization.BarChart(document.getElementById('api_chart'));
+          
+          chart.draw(data, options);
+        }
+      </pre>
+      <p>As you can see, we are using the same general arrayToDataTable format, and simply replacing some of our hard coded
+      variables with the data variables we declared earlier (dataOne - dataFour). The variable dataOne provides the header 
+      value that is the stock name, and the other dataNum variables provide the stock prices. This data will be passed to
+      the chart.draw function as before, and we will get a chart that displays API data! Scroll down to see the finished result.</p>
+      
+      <h2 class="page-header">The Finished Product</h2>
       <div id="api_chart"></div>
+      <br />
+      <p><a href="/interactive">Interactive Charts</a><p>
     </div>
   </div>
 </div>
