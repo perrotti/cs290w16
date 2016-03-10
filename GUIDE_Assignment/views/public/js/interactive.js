@@ -19,7 +19,7 @@ function init() {
                  },
                  backgroundColor: {strokeWidth:3}};  // Put a border around the chart
 
-  var chart = new google.visualization.BarChart(document.getElementById('interactive_chart'));
+  var chart = new google.visualization.ColumnChart(document.getElementById('interactive_chart'));
   var upButton = document.getElementById('button_up');
   var downButton = document.getElementById('button_down');
 
