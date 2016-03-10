@@ -15,7 +15,7 @@ var options = {title:'Chocolate M&Ms I Want to Eat',
                animation: {
                   duration: 1000, // in ms
                   easing: 'out' // Start fast then slow down on animation
-               }
+               },
                vAxis: {minValue: 0, maxValue:500}, // Fix the vertical axis range
                backgroundColor: {strokeWidth:3}};  // Put a border around the chart
 
