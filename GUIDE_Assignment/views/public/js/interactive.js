@@ -17,7 +17,6 @@ function init() {
                     duration: 1000, // in ms
                     easing: 'out' // Start fast then slow down on animation
                  },
-                 vAxis: {minValue: 0, maxValue:500}, // Fix the vertical axis range
                  backgroundColor: {strokeWidth:3}};  // Put a border around the chart
 
   var chart = new google.visualization.BarChart(document.getElementById('interactive_chart'));
@@ -38,7 +37,7 @@ function init() {
 
   // Add listener that modifies chart value when up button clicked
   upButton.onclick = function() {
-    if (data.getValue(0, 1) < 500) {
+    if (data.getValue(0, 1) < 10000) {
       var newCount = data.getValue(0, 1) + 50;
       data.setValue(0, 1, newCount);
       drawChart();
