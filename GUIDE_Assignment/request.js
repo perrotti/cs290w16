@@ -17,6 +17,11 @@ app.get('/', function(req, res, next) {
   var input = {};
   input.javascriptfile = "/js/intro.js";
   input.chartdata = "Blue";
+  // Dummy data for main bootstrap file
+  input.one = "Text";
+  input.two = 0;
+  input.three = 0;
+  input.four = 0;
   res.render('intro', input);
 });
 
@@ -24,12 +29,22 @@ app.get('/intro', function(req, res, next) {
   var input = {};
   input.javascriptfile = "/js/intro.js";
   input.chartdata = "Blue";
+  // Dummy data for main bootstrap file
+  input.one = "Text";
+  input.two = 0;
+  input.three = 0;
+  input.four = 0;
   res.render('intro', input);
 });
 
 app.get('/basicsyntax', function(req, res, next) {
   var input = {};
   input.javascriptfile = "/js/basicsyntax.js";
+  // Dummy data for main bootstrap file
+  input.one = "Text";
+  input.two = 0;
+  input.three = 0;
+  input.four = 0;
   res.render('basicsyntax', input);
 });
 
@@ -66,6 +81,11 @@ app.get('/api', function(req, res, next) {
 app.get('/interactive', function(req, res, next) {
   var input = {};
   input.javascriptfile = "/js/interactive.js";
+  // Dummy data for main bootstrap file
+  input.one = "Text";
+  input.two = 0;
+  input.three = 0;
+  input.four = 0;
   res.render('interactive', input);
 });
 
