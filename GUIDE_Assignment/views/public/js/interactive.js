@@ -5,8 +5,8 @@ google.charts.setOnLoadCallback(init);
 multiple times. These variables should stay constant unless modified by our buttons */
 function init() {
   var data = new google.visualization.arrayToDataTable([
-    ['Candy', 'Price'],
-    ['Price Low', 250]
+    ['Candy', 'Count'],
+    ['Skittles', 250]
   ]);
 
   var options = {title:'Skittles I Want to Eat',

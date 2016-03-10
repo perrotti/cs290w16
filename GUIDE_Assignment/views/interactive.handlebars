@@ -16,7 +16,18 @@
       the size of our ColumnChart, while the other will grow it. We will also briefly touch on how these actions
       can be animated, to provide a slick look to the UI.</p>
       
-      <h2 class="page-header">The Interactive Chart</h2>
+      <h2 class="page-header">Creating an Interactive Chart</h2>
+      <h3 class=page-header">The HTML</h3>
+      <p>The first step to creating our Google Chart that will adjust to user interaction, is adding the necessary HTML.
+      As seen below in the code snippet, in addition to the standard div for displaying the chart, a pair of buttons have
+      been added. These buttons will be referenced by the javascript that creates the Google Chart, and will enable
+      the user interaction.</p>
+      <pre class="prettyprint lang-html linenums">
+        &ltdiv id="interactive_chart"&gt&lt/div&gt
+        &ltbutton id="button_down"&gtDown&lt/button&gt
+        &ltbutton id="button_up"&gtUp&lt/button&gt
+      </pre>
+ 
       <div id="interactive_chart"></div>
       <button id="button_down">Down</button>
       <button id="button_up">Up</button>
