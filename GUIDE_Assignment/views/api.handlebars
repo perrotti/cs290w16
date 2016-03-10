@@ -10,8 +10,84 @@
       </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-      <h1 class="page-header">Testing Yahoo Stock API</h1>
+      <h1 class="page-header">API Integration</h1>
+      <p>To make Google Charts truly useful, you need to bring in some data (nobody wants to 
+      hard code a website constantly). In this section we are going to run through an example
+      using the Yahoo Stock API. This API doesn't have very good documentation (really none at all),
+      so several of my code snippits will be explaining how it works so you understand what is taking
+      place via Node.js and Express</p>
+      <h2 class="page-header">Retrieving the API Information</h2>
+      <p>The code snippit below is the entire .get function in Express that calls the Yahoo API, and formats
+      the data that will be passed to Google Charts</p>
+      <pre class="prettyprint lang-js linenums">
+        app.get('/api', function(req, res, next) {
+          var input = {};
+          // Provide the javascript file to reference
+          input.javascriptfile = "/js/api.js";
+          request('http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json&view=detail', function(err, response, body) {
+            if(!err && response.statusCode < 400) {
+              // Parse returned content
+              var info = JSON.parse(body);
+              
+              // Parse out the fields that we want to variables
+              // Number() and toFixed() used to create two decimal point number
+              input.one = info.list.resources[0].resource.fields.name;
+              var temp = info.list.resources[0].resource.fields.day_low;
+              input.two = Number(temp).toFixed(2);
+              temp = info.list.resources[0].resource.fields.price;
+              input.three = Number(temp).toFixed(2);
+              temp = info.list.resources[0].resource.fields.day_high;
+              input.four = Number(temp).toFixed(2);
+
+              // Render the page using the provided inputs
+              res.render('api', input);
+            } else {
+              if(response) {
+               console.log(response.statusCode);
+              }
+              next(err);
+            }
+          });
+        });
+      </pre>
       
+      
+      
+      <pre class="prettyprint lang-js linenums">
+        {
+          "list" : { 
+            "meta" : { 
+                "type" : "resource-list",
+                "start" : 0,
+                "count" : 1
+            },
+            "resources" : [ 
+              {
+                "resource" : { 
+                  "classname" : "Quote",
+                  "fields" : { 
+                    "change" : "-0.059998",
+                    "chg_percent" : "-0.059386",
+                    "day_high" : "101.580002",
+                    "day_low" : "100.279999",
+                    "issuer_name" : "Apple Inc.",
+                    "issuer_name_lang" : "Apple Inc.",
+                    "name" : "Apple Inc.",
+                    "price" : "100.970001",
+                    "symbol" : "AAPL",
+                    "ts" : "1457556603",
+                    "type" : "equity",
+                    "utctime" : "2016-03-09T20:50:03+0000",
+                    "volume" : "23938780",
+                    "year_high" : "134.540000",
+                    "year_low" : "92.000000"
+                  }
+                }
+              }
+            ]
+          }
+        }
+      </pre>
       <div id="api_test_chart"></div>
     </div>
   </div>

@@ -7,9 +7,9 @@ function drawChart() {
   // Create the data you want to include in your chart
   var data = new google.visualization.arrayToDataTable([
     [dataOne, 'Price'],
-    ['Low', dataTwo],
+    ['Price Low', dataTwo],
     ['Current Price', dataThree],
-    ['High', dataFour]
+    ['Price High', dataFour]
   ]);
 
   var options = {title:dataOne + ' Stock Price',
