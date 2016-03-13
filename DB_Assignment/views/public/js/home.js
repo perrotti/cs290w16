@@ -47,33 +47,9 @@ function requestTable() {
         // Check to make sure valid response is received
         if (req.status >= 200 && req.status < 400) {
           // Parse out the JSON information
-          var infoReceived = JSON.parse(req.responseText);
-          // Calculate the temperature
-          var tableElem = document.getElementById("workout-table");
-          for (var i = 0; i < newTableRows.length; i++) {
-            var tableRow = document.createElement("tr");
-            var updateButton = document.createElement("button");
-            updateButton.id = "update" + newTableRows[0].id;
-            updateButton.type = "submit";
-            updateButton.value = "update";
-            var deleteButton = document.createElement("button");
-            deleteButton.id = "delete" + newTableRows[0].id;
-            deleteButton.type = "submit";
-            deleteButton.value = "delete";
-            var idRow = document.createElement("button");
-            
-            
-            
-            var tempP = document.createElement("p");
-          
-          
-          
-          }var tempF = (1.8 * (weather.main.temp - 273)) + 32;
-          tempF = tempF.toFixed(2);
-          // Post the results of city, temp, and humidity
-          document.getElementById("city").textContent = pText[0] + weather.name;
-          document.getElementById("temp").textContent = pText[1] + tempF;
-          document.getElementById("humidity").textContent = pText[2] + weather.main.humidity + "%";
+          var infoReceived = JSON.parse(req.tableInfo);
+          document.getElementById("test").textContent = infoReceived;
+          constructTable(infoReceived);
         } else {
           // If a server error was received, post the response text to the log
           console.log("Error in network request: " + request.statusText);
@@ -86,20 +62,18 @@ function requestTable() {
       // If invalid data was received, post error message to log and outputs, and ensure form doesn't refresh page
       console.log("Invalid input");
       // Set error code to result field to alert the user input was invalid
-      document.getElementById("city").textContent = pText[0] + "Invalid Input";
-      document.getElementById("temp").textContent = pText[1] + "Invalid Input";
-      document.getElementById("humidity").textContent = pText[2] + "Invalid Input";
+      document.getElementById("test").textContent = pText[0] + "Invalid Input";
       // Prevent refresh
       event.preventDefault();
     }
   });
-
 }
 
 
 // Add an event listener that doesn't trigger until the entire HTML page is loaded
-document.addEventListener('DOMContentLoaded', formSubmission);
+//document.addEventListener('DOMContentLoaded', formSubmission);
 
+/*
 function formSubmission() {
   // Creates a function that fires when the submit button is clicked
   document.getElementById('submit').addEventListener('click', function(event) { 
@@ -175,7 +149,6 @@ function formSubmission() {
       event.preventDefault();
     }
   });
-}
+}*/
 
-//requestTable();
-constructTable(i);
+requestTable();
