@@ -31,6 +31,7 @@ function constructTable(input) {
         newCell = document.createElement("td");
         newCell.textContent = object[key];
         newRow.appendChild(newCell);
+        }
       });
       table.appendChild(newRow);
     });
