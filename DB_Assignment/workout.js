@@ -30,7 +30,7 @@ var initialTable = "CREATE TABLE IF NOT EXISTS workout("+
 pool.query(initialTable, function(err){ 
 });
 
-pool.query("INSERT INTO workout (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (a, 1, 1, 2015-01-01, 1),(b, 2, 2, 2015-01-01, 0)", function(err, result){
+pool.query("INSERT INTO workout (name, reps, weight, date, lbs) VALUES (a, 1, 1, 2015-01-01, 1),(b, 2, 2, 2015-01-01, 0)", function(err, result){
 });
 
 app.get('/', function(req, res, next) {
@@ -56,7 +56,6 @@ app.get('/testing', function(req, res, next) {
     }
     input.results = "Table Loaded";
     input.tableInfo = JSON.stringify(rows);
-    res.setHeader('Content-Type', 'application/json');
     res.render("testing", input);
   });
 });
