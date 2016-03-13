@@ -80,7 +80,7 @@ app.get('/select', function(req, res, next) {
     input.tableInfo = "Table Loaded";
     input.tableInfo = JSON.stringify(rows);
     res.setHeader('Content-Type', 'application/json');
-    res.json(input);
+    res.send(input);
   });
 });
 
