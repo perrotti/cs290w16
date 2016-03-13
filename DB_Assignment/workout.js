@@ -18,6 +18,20 @@ app.set('view engine', 'handlebars');
 app.set('port', 4999);
 app.use(express.static(__dirname + '/views/public'));
 
+// Create the table when the server starts
+var initialTable = "CREATE TABLE IF NOT EXISTS workouts("+
+  "id INT PRIMARY KEY AUTO_INCREMENT,"+
+  "name VARCHAR(255) NOT NULL,"+
+  "reps INT,"+
+  "weight INT,"+
+  "date DATE,"+
+  "lbs BOOLEAN)";
+  
+pool.query(initialTable, function(err){ 
+});
+
+pool.query("INSERT INTO workout (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (a, 1, 1, 2015-01-01, 1),(b, 2, 2, 2015-01-01, 0)", function(err, result){
+});
 
 app.get('/', function(req, res, next) {
   var input = {};
@@ -26,8 +40,39 @@ app.get('/', function(req, res, next) {
       next(err);
       return;
     }
-    input.results = JSON.stringify(rows);
-    res.render('workout', context);
+    input.results = "Table Loaded";
+    input.tableInfo = JSON.stringify(rows);
+    res.setHeader('Content-Type', 'application/json');
+    res.render("workout", input);
+  });
+});
+
+app.get('/testing', function(req, res, next) {
+  var input = {};
+  pool.query('SELECT * FROM workout', function(err, rows, fields){
+    if(err){
+      next(err);
+      return;
+    }
+    input.results = "Table Loaded";
+    input.tableInfo = JSON.stringify(rows);
+    res.setHeader('Content-Type', 'application/json');
+    res.render("testing", input);
+  });
+});
+
+
+app.get('/select', function(req, res, next) {
+  var input = {};
+  pool.query('SELECT * FROM workout', function(err, rows, fields){
+    if(err){
+      next(err);
+      return;
+    }
+    input.tableInfo = "Table Loaded";
+    input.tableInfo = JSON.stringify(rows);
+    res.setHeader('Content-Type', 'application/json');
+    res.json(input);
   });
 });
 
@@ -43,87 +88,32 @@ app.get('/update', function(req, res, next) {
   res.render('intro', input);
 });
 
-app.get('/basicsyntax', function(req, res, next) {
+app.get('/delete', function(req, res, next) {
   var input = {};
-  input.javascriptfile = "/js/basicsyntax.js";
+  input.javascriptfile = "/js/intro.js";
+  input.chartdata = "Blue";
   // Dummy data for main bootstrap file
   input.one = "Text";
   input.two = 0;
   input.three = 0;
   input.four = 0;
-  res.render('basicsyntax', input);
+  res.render('intro', input);
 });
 
-app.get('/api', function(req, res, next) {
-  var input = {};
-  // Provide the javascript file to reference
-  input.javascriptfile = "/js/api.js";
-  request('http://finance.yahoo.com/webservice/v1/symbols/AAPL/quote?format=json&view=detail', function(err, response, body) {
-    if(!err && response.statusCode < 400) {
-      // Parse returned content
-      var info = JSON.parse(body);
-      
-      // Parse out the fields that we want to variables
-      // Number() and toFixed() used to create two decimal point number
-      input.one = info.list.resources[0].resource.fields.name;
-      var temp = info.list.resources[0].resource.fields.day_low;
-      input.two = Number(temp).toFixed(2);
-      temp = info.list.resources[0].resource.fields.price;
-      input.three = Number(temp).toFixed(2);
-      temp = info.list.resources[0].resource.fields.day_high;
-      input.four = Number(temp).toFixed(2);
-
-      // Render the page using the provided inputs
-      res.render('api', input);
-    } else {
-      if(response) {
-       console.log(response.statusCode);
-      }
-      next(err);
-    }
-  });
-});
-
-app.get('/interactive', function(req, res, next) {
-  var input = {};
-  input.javascriptfile = "/js/interactive.js";
-  // Dummy data for main bootstrap file
-  input.one = "Text";
-  input.two = 0;
-  input.three = 0;
-  input.four = 0;
-  res.render('interactive', input);
-});
-
-app.get('/interactiveapi', function(req, res, next) {
-  var input = {};
-  // Provide the javascript file to reference
-  input.javascriptfile = "/js/interactiveapi.js";
-  // Comma seperated stock tickers to retrieve multiple stock prices in one call
-  request('http://finance.yahoo.com/webservice/v1/symbols/AAPL,GOOGL,AMZN/quote?format=json&view=detail', function(err, response, body) {
-    if(!err && response.statusCode < 400) {
-      // Parse returned content
-      var info = JSON.parse(body);
-      
-      // Parse out the stock prices we want
-      // Number() and toFixed() used to create two decimal point number
-      // Note resources array number is changed to access multiple stocks
-      input.one = "Text";
-      var temp = info.list.resources[0].resource.fields.price;
-      input.two = Number(temp).toFixed(2);
-      temp = info.list.resources[1].resource.fields.price;
-      input.three = Number(temp).toFixed(2);
-      temp = info.list.resources[2].resource.fields.day_high;
-      input.four = Number(temp).toFixed(2);
-
-      // Render the page using the provided inputs
-      res.render('interactiveapi', input);
-    } else {
-      if(response) {
-       console.log(response.statusCode);
-      }
-      next(err);
-    }
+app.get('/reset-table',function(req,res,next){
+  var context = {};
+  pool.query("DROP TABLE IF EXISTS workouts", function(err){
+    var createString = "CREATE TABLE workouts("+
+    "id INT PRIMARY KEY AUTO_INCREMENT,"+
+    "name VARCHAR(255) NOT NULL,"+
+    "reps INT,"+
+    "weight INT,"+
+    "date DATE,"+
+    "lbs BOOLEAN)";
+    pool.query(createString, function(err){
+      context.results = "Table reset";
+      res.render('home', context);
+    })
   });
 });
 
