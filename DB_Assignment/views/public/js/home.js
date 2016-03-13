@@ -1,4 +1,4 @@
-var url = http://52.24.188.242:4999;
+var url = "http://52.24.188.242:4999";
 
 function constructTable(input) {
   var table = document.getElementById("table");
