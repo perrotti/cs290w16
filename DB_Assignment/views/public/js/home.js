@@ -40,34 +40,25 @@ function constructTable(input) {
 }
 
 function requestTable() {
-      var req = new XMLHttpRequest();
-      var requestString = url + "/select";
-      req.open("GET", requestString, true);
-      // Create a load event for the AJAX request (asychronous)
-      req.addEventListener('load', function() {
-        // Check to make sure valid response is received
-        if (req.status >= 200 && req.status < 400) {
-          // Parse out the JSON information
-          var infoReceived = JSON.parse(req.tableInfo);
-          document.getElementById("test").textContent = infoReceived;
-          constructTable(infoReceived);
-        } else {
-          // If a server error was received, post the response text to the log
-          console.log("Error in network request: " + request.statusText);
-        }
-      });
-      // Send the request and prevent default refresh
-      req.send(null);
-      event.preventDefault();
+  var req = new XMLHttpRequest();
+  var requestString = url + "/select";
+  req.open("GET", requestString, true);
+  // Create a load event for the AJAX request (asychronous)
+  req.addEventListener('load', function() {
+    // Check to make sure valid response is received
+    if (req.status >= 200 && req.status < 400) {
+      // Parse out the JSON information
+      var infoReceived = JSON.parse(req.tableInfo);
+      document.getElementById("test").textContent = infoReceived;
+      constructTable(infoReceived);
     } else {
-      // If invalid data was received, post error message to log and outputs, and ensure form doesn't refresh page
-      console.log("Invalid input");
-      // Set error code to result field to alert the user input was invalid
-      document.getElementById("test").textContent = pText[0] + "Invalid Input";
-      // Prevent refresh
-      event.preventDefault();
+      // If a server error was received, post the response text to the log
+      console.log("Error in network request: " + request.statusText);
     }
   });
+  // Send the request and prevent default refresh
+  req.send(null);
+  event.preventDefault();
 }
 
 
