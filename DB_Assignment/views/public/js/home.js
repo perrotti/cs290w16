@@ -58,7 +58,6 @@ function requestTable() {
   });
   // Send the request and prevent default refresh
   req.send(null);
-  event.preventDefault();
 }
 
 
