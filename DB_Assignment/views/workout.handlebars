@@ -1,0 +1,28 @@
+<h1>Custom Workout Tracker</h1>
+<form>
+  <fieldset>
+    <legend>Add Workout Item</legend>
+    <!-- This field set contains the input for city and state -->
+    <label for="name_input">Workout Name:
+      <input type="text" id="name-input" name="name_input" size="30" maxlength="255" placeholder="Bench Press" />
+    </label>
+    <br /><br />
+    <label for="reps_input">Reps:
+      <input type="number" id="reps-input" name="reps_input" placeholder="10" min="0" max="999" />
+    </label>
+    <br /><br />
+    <label for="weight_input">Weight:
+      <input type="number" id="weight-input" name="weight_input" placeholder="115" min="0" max="999"/>
+    </label>
+    <br /><br />
+    <label for="date_input">Date:
+      <input type="date" id="date-input" name="date_input" placeholder="2015-01-31" />
+    </label>
+    <br /><br />
+    <label for="lbs_input">Lbs?:
+      <input type="number" id="lbs-input" name="lbs_input" min="0" max="1" placeholder="1 for lbs, 0 for kg" />
+    </label>
+    <br /><br />
+    <input type="submit" value="submit" id="submit">
+  </fieldset>
+</form>
