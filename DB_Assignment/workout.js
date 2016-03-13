@@ -85,7 +85,7 @@ app.get('/update', function(req, res, next) {
   input.two = 0;
   input.three = 0;
   input.four = 0;
-  res.render('intro', input);
+  res.render('workout', input);
 });
 
 app.get('/delete', function(req, res, next) {
@@ -97,7 +97,7 @@ app.get('/delete', function(req, res, next) {
   input.two = 0;
   input.three = 0;
   input.four = 0;
-  res.render('intro', input);
+  res.render('workout', input);
 });
 
 app.get('/reset-table',function(req,res,next){
@@ -112,7 +112,7 @@ app.get('/reset-table',function(req,res,next){
     "lbs BOOLEAN)";
     pool.query(createString, function(err){
       context.results = "Table reset";
-      res.render('home', context);
+      res.render('workout', context);
     })
   });
 });
