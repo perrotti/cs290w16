@@ -28,9 +28,11 @@ function linkDeleteButton(button, id) {
       if (req.status >= 200 && req.status < 400) {
         // Parse out the JSON information
         var infoReceived = JSON.parse(req.responseText);
+        document.getElementById("status").textContent = "Deleted row with ID = " + id;
         constructTable(infoReceived);
       } else {
         // If a server error was received, post the response text to the log
+        document.getElementById("status").textContent = "Error while trying to delete row";
         console.log("Error in network request: " + request.statusText);
       }
     });
