@@ -40,10 +40,9 @@ app.get('/', function(req, res, next) {
 app.get('/insert', function(req, res, next) {
   var input = {};
   pool.query("INSERT INTO workout (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs] , function(err, result){
-    var id = String(result.returnId);
-    console.log(id);
-    res.setHeader('Content-Type', 'text/plain');
-    res.send(id);
+    input.id = result.returnId;
+    console.log(input.id);
+    res.send(input);
   });
 });
 
