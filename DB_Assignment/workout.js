@@ -95,7 +95,6 @@ app.get('/update', function(req, res, next) {
       next(err);
       return;
     }
-    console.log(rows);
     input.id = rows[0].id;
     input.name = rows[0].name;
     input.reps = rows[0].reps;
