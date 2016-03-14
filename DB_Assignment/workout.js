@@ -90,7 +90,7 @@ app.get('/reset-table',function(req,res,next){
 
 app.get('/update', function(req, res, next) {
   var input = {};
-  pool.query('SELECT * FROM workout WHERE id=?', [req.query.id], function(err, rows, fields){
+  pool.query("SELECT id, name, reps, weight, DATE_FORMAT(date,'%d/%m/%Y') AS date, lbs FROM workout WHERE id=?", [req.query.id], function(err, rows, fields){
     if(err){
       next(err);
       return;
