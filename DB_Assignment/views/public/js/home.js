@@ -104,9 +104,9 @@ function requestTable() {
 }
 
 // Add an event listener that doesn't trigger until the entire HTML page is loaded
-//document.addEventListener('DOMContentLoaded', formSubmission);
+document.addEventListener('DOMContentLoaded', formSubmission);
 
-/*
+//FIXIIXIXIXIXIIXIXIXIXIXIXIXIXIXIXIXIXIXIXIXIIXIXIXIXIXX
 function formSubmission() {
   // Creates a function that fires when the submit button is clicked
   document.getElementById('submit').addEventListener('click', function(event) { 
@@ -135,34 +135,11 @@ function formSubmission() {
       req.addEventListener('load', function() {
         // Check to make sure valid response is received
         if (req.status >= 200 && req.status < 400) {
-          // Parse out the JSON information
-          var newTableRows = JSON.parse(req.responseText);
-          // Calculate the temperature
-          var tableElem = document.getElementById("workout-table");
-          for (var i = 0; i < newTableRows.length; i++) {
-            var tableRow = document.createElement("tr");
-            var updateButton = document.createElement("button");
-            updateButton.id = "update" + newTableRows[0].id;
-            updateButton.type = "submit";
-            updateButton.value = "update";
-            var deleteButton = document.createElement("button");
-            deleteButton.id = "delete" + newTableRows[0].id;
-            deleteButton.type = "submit";
-            deleteButton.value = "delete";
-            var idRow = document.createElement("button");
-            
-            
-            
-            var tempP = document.createElement("p");
-          
-          
-          
-          }var tempF = (1.8 * (weather.main.temp - 273)) + 32;
-          tempF = tempF.toFixed(2);
-          // Post the results of city, temp, and humidity
-          document.getElementById("city").textContent = pText[0] + weather.name;
-          document.getElementById("temp").textContent = pText[1] + tempF;
-          document.getElementById("humidity").textContent = pText[2] + weather.main.humidity + "%";
+          // Server sends back ID that was created, alert user that new ID was accepted
+          var newRowId = req.responseText;
+          document.getElementById("status").textContent = "Added new workout row with ID " + newRowId;
+          // Refresh the table
+          requestTable();
         } else {
           // If a server error was received, post the response text to the log
           console.log("Error in network request: " + request.statusText);
@@ -172,16 +149,15 @@ function formSubmission() {
       req.send(null);
       event.preventDefault();
     } else {
-      // If invalid data was received, post error message to log and outputs, and ensure form doesn't refresh page
+      // If invalid data was received, post error message to the console
       console.log("Invalid input");
-      // Set error code to result field to alert the user input was invalid
-      document.getElementById("city").textContent = pText[0] + "Invalid Input";
-      document.getElementById("temp").textContent = pText[1] + "Invalid Input";
-      document.getElementById("humidity").textContent = pText[2] + "Invalid Input";
+      // Set error code to status field in HTML
+      document.getElementById("status").textContent = "Invalid input provided. Please ensure workout has a name";
       // Prevent refresh
       event.preventDefault();
     }
   });
-}*/
+}
 
+// Initial loading of table when the page is first called
 requestTable();

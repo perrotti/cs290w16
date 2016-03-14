@@ -31,41 +31,20 @@ var initialTable = "CREATE TABLE IF NOT EXISTS workout("+
   
 pool.query(initialTable, function(err){ 
 });
-var data1 = "a";
-var data2 = 1;
-var data3 = 1;
-var data4 = "2015-01-01";
-var data5 = 0;
-
-pool.query("INSERT INTO workout (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [data1, data2, data3, data4, data5] ,function(err, result){
-});
 
 app.get('/', function(req, res, next) {
   var input = {};
-  /*pool.query('SELECT * FROM workout', function(err, rows, fields){
-    if(err){
-      next(err);
-      return;
-    }*/
-    input.tableInfo = "STUFF";
-    input.results = "PAGE LOADED";
-    res.render('workout', input);
+  res.render('workout', input);
 });
 
-app.get('/testing', function(req, res, next) {
+app.get('/insert', function(req, res, next) {
   var input = {};
-  pool.query("INSERT INTO workout (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [data1, data2, data3, data4, data5] , function(err, result){
-    pool.query('SELECT * FROM workout', function(err, rows, fields){
-      if(err){
-        next(err);
-        return;
-      }
-      var tableInfo = JSON.stringify(rows);
-      res.send(tableInfo);
-    });
+  pool.query("INSERT INTO workout (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs] , function(err, result){
+    input.results = results.insertId;
+    res.setHeader('Content-Type', 'text/plain');
+    res.send(input);
   });
 });
-
 
 app.get('/select', function(req, res, next) {
   pool.query('SELECT * FROM workout', function(err, rows, fields){
