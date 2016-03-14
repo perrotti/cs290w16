@@ -106,7 +106,6 @@ function requestTable() {
 // Add an event listener that doesn't trigger until the entire HTML page is loaded
 document.addEventListener('DOMContentLoaded', formSubmission);
 
-//FIXIIXIXIXIXIIXIXIXIXIXIXIXIXIXIXIXIXIXIXIXIIXIXIXIXIXX
 function formSubmission() {
   // Creates a function that fires when the submit button is clicked
   document.getElementById('submit').addEventListener('click', function(event) { 
@@ -121,6 +120,7 @@ function formSubmission() {
     // Check to make sure the user provided accurate values (city && state get presedence)
     if (name != "") {
       getString = "/insert?" + "name=" + name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + lbs;
+      console.log(getString);
     } else { 
       var validInput = false;
     }
