@@ -64,6 +64,13 @@ function requestTable() {
   req.send(null);
 }
 
+function clearTable() {
+  var table = document.getElementById("table");
+  while (table.firstChild != table.lastChild) {
+    table.removeChild(table.lastChild);
+  }
+}
+
 
 // Add an event listener that doesn't trigger until the entire HTML page is loaded
 //document.addEventListener('DOMContentLoaded', formSubmission);
@@ -147,3 +154,6 @@ function formSubmission() {
 }*/
 
 requestTable();
+
+var delay=3000; 
+setTimeout(function(){clearTable()}, delay); 

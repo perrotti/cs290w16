@@ -5,3 +5,7 @@ table, th, td {
 th, td {
     height: 35px;
 } 
+
+table:nth-child(2) {
+    background-color: lightblue;
+}
