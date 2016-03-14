@@ -110,14 +110,14 @@ app.get('/update', function(req, res, next) {
 
 app.get('/update_submit', function(req,res,next){
   var input = {};
-  mysql.pool.query("SELECT * FROM workout WHERE id=?", [req.query.id], function(err, result){
+  pool.query("SELECT * FROM workout WHERE id=?", [req.query.id], function(err, result){
     if(err){
       next(err);
       return;
     }
     if(result.length == 1){
       var curVals = result[0];
-      mysql.pool.query("UPDATE workout SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=? ",
+      pool.query("UPDATE workout SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=? ",
         [req.query.name || curVals.name, req.query.reps || curVals.reps, req.query.weight || curVals.weight, curVals.date, req.query.lbs || curVals.lbs, req.query.id],
         function(err, result){
         if(err){
