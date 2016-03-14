@@ -37,7 +37,7 @@ function constructTable(input) {
         newRow.appendChild(newCell);
         }
       });
-      table.appendChild(newRow);
+      tbody.appendChild(newRow);
     });
   }
   return table;
@@ -154,3 +154,4 @@ function formSubmission() {
 }*/
 
 requestTable();
+clearTable();
