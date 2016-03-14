@@ -41,7 +41,7 @@ app.get('/insert', function(req, res, next) {
   var input = {};
   pool.query("INSERT INTO workout (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs] , function(err, result){
     input.id = result.returnId;
-    console.log(input.id);
+    console.log(result);
     res.send(input);
   });
 });
