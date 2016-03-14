@@ -34,7 +34,7 @@ pool.query(initialTable, function(err){
 
 app.get('/', function(req, res, next) {
   var input = {};
-  if (req.query.id != "") {
+  if (!(req.query.id == undefined)) {
     input.status = "Updated row with ID = " + req.query.id;
   }
   res.render('workout', input);
