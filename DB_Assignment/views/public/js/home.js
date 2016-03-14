@@ -66,7 +66,8 @@ function requestTable() {
 
 function clearTable() {
   var table = document.getElementById("table");
-  while (table.firstChild != table.lastChild) {
+  int i;
+  for (i = 1 < table.childNodes.length; i++) {
     table.removeChild(table.lastChild);
   }
 }
