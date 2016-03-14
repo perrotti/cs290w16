@@ -74,7 +74,7 @@ function constructTable(input) {
       // Add the values for each field from SQL query
       keys.forEach(function(key) {
         if (key != "id") {
-          if(key = "date") {
+          if(key == "date") {
             newCell = document.createElement("td");
             var tempString = object[key];
             newCell.textContent = tempString.substring(0,9);
