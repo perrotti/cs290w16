@@ -2,6 +2,8 @@ var url = "http://52.24.188.242:4999";
 
 function constructTable(input) {
   var table = document.getElementById("table");
+  var tbody = document.createElement("tbody");
+  table.appendChild("tbody");
   if (input[0] != null)  {
     var keys = Object.keys(input[0]);
     input.forEach(function(object) {
@@ -44,9 +46,9 @@ function constructTable(input) {
 function clearTable() {
   var table = document.getElementById("table");
   var i;
-    for (i = table.childNodes.length - 1; i > 1; i--) {
-      table.removeChild(table.childNodes[i]);
-    }
+  for (i = table.childNodes.length - 1; i > 1; i--) {
+    table.removeChild(table.childNodes[i]);
+  }
 }
 
 function requestTable() {
