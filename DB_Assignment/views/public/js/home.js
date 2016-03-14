@@ -139,7 +139,7 @@ function formSubmission() {
           // Server sends back ID that was created, alert user that new ID was accepted
           var newRowId = req.responseText;
           console.log(newRowId);
-          document.getElementById("status").textContent = "Added new workout row with ID " + newRowId;
+          document.getElementById("status").textContent = "Added new workout row with ID = " + newRowId;
           // Refresh the table
           requestTable();
         } else {
