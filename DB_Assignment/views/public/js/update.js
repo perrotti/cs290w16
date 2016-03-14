@@ -32,12 +32,7 @@ function formSubmission() {
       req.addEventListener('load', function() {
         // Check to make sure valid response is received
         if (req.status >= 200 && req.status < 400) {
-          // Server sends back ID that was created, alert user that new ID was accepted
-          var insertInfo = JSON.parse(req.responseText);
-          // Clear the form
-          document.forms['main-form'].reset();
-          // Refresh the table
-          requestTable();
+          // Do nothing because other page needs to load
         } else {
           // If a server error was received, post the response text to the log
           console.log("Error in network request: " + req.statusText);
