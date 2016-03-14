@@ -157,4 +157,5 @@ function formSubmission() {
 requestTable();
 
 var delay=10000; 
+setTimeout(clearTable,delay);
 setTimeout(function(){clearTable()}, delay); 
