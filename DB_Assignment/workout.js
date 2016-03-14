@@ -134,7 +134,6 @@ app.get('/update_submit', function(req,res,next){
           next(err);
           return;
         }
-        console.log(result);
         // Let the user know which item we updated
         input.status = "Updated row with ID = " + req.query.id;
         res.render('workout', input);
