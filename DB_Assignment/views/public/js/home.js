@@ -44,8 +44,10 @@ function constructTable(input) {
 function clearTable() {
   var table = document.getElementById("table");
   var i;
-  for (i = 1; i < table.childNodes.length; i++) {
-    table.removeChild(table.lastChild);
+  if (table.childNodes.length > 1) {
+    for (i = 1; i < table.childNodes.length; i++) {
+      table.removeChild(table.lastChild);
+    }
   }
 }
 
