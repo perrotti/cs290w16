@@ -17,7 +17,7 @@ function formSubmission() {
     var validInput = true;
     // Check to make sure the user provided accurate values (city && state get presedence)
     if (name != "") {
-      getString = "/update_submit?" "id=" + id + "&name=" + name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + lbs;
+      getString = "/update_submit?" + "id=" + id + "&name=" + name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + lbs;
     } else { 
       var validInput = false;
     }
