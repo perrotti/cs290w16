@@ -148,6 +148,7 @@ function formSubmission() {
         } else {
           // If a server error was received, post the response text to the log
           console.log("Error in network request: " + req.statusText);
+          document.getElementById("status").textContent = "Your submission is invalid. Change fields and try again";
         }
       });
       // Send the request and prevent default refresh
