@@ -2,7 +2,7 @@ var url = "http://52.24.188.242:4999";
 
 function constructTable(input) {
   var table = document.getElementById("table");
-  var tbody = document.createElement("tbody");
+  var tbody = document.createElement(tbody);
   table.appendChild("tbody");
   if (input[0] != null)  {
     var keys = Object.keys(input[0]);
