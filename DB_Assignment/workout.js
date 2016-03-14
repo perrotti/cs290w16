@@ -60,7 +60,7 @@ app.get('/testing', function(req, res, next) {
         next(err);
         return;
       }
-      input.tableInfo = JSON.stringify(rows);
+      var tableInfo = JSON.stringify(rows);
       res.send(tableInfo);
     });
   });
