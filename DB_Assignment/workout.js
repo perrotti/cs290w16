@@ -48,7 +48,7 @@ app.get('/', function(req, res, next) {
       return;
     }
     input.tableInfo = JSON.stringify(rows);
-    res.render('workout', input.tableInfo);
+    res.render('workout', input);
   });
 });
 
