@@ -49,7 +49,7 @@ app.get('/', function(req, res, next) {
     }
     input.results = "Table Loaded";
     input.tableInfo = JSON.stringify(rows);
-    res.render("workout", input);
+    res.render('workout', input);
   });
 });
 
