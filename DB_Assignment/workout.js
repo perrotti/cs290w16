@@ -78,7 +78,7 @@ app.get('/delete', function(req, res, next) {
   });
 });
 
-app.get('/reset-table',function(req,res,next){
+app.get('/reset_table',function(req,res,next){
   var input = {};
   // This code resets the table by dropping it and creating a new one
   pool.query("DROP TABLE IF EXISTS workout", function(err){
