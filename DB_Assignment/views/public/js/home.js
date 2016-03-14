@@ -44,11 +44,9 @@ function constructTable(input) {
 function clearTable() {
   var table = document.getElementById("table");
   var i;
-  if (table.childNodes.length > 1) {
-    for (i = 1; i < table.childNodes.length; i++) {
-      table.removeChild(table.lastChild);
+    for (i = table.childNodes.length - 1; i > 0; i--) {
+      table.removeChild(table.childNodes[i]);
     }
-  }
 }
 
 function requestTable() {
@@ -61,10 +59,7 @@ function requestTable() {
     // Check to make sure valid response is received
     if (req.status >= 200 && req.status < 400) {
       // Parse out the JSON information
-      console.log(req.responseText);
       var infoReceived = JSON.parse(req.responseText);
-      console.log(infoReceived);
-      document.getElementById("test").textContent = infoReceived;
       constructTable(infoReceived);
     } else {
       // If a server error was received, post the response text to the log
