@@ -151,3 +151,4 @@ function formSubmission() {
 }*/
 
 requestTable();
+clearTable();
