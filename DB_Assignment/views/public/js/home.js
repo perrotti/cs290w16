@@ -7,6 +7,38 @@ function clearTable() {
   }
 }
 
+function linkUpdateButton(button, id) {
+  button.addEventListener('click', function(event) {
+    event.preventDefault();
+    var variable = "id=" + object["id"];
+    window.location.href = "../update?" + variable;
+  });
+}
+
+function linkDeleteButton(button, id) {
+  button.addEventListener('click', function(event) {
+    event.preventDefault();
+    var variable = "id=" + id;
+    var requestString = url + "/delete?" + variable;
+    var req = new XMLHttpRequest();
+    req.open("GET", requestString, true);
+    // Create a load event for the AJAX request (asychronous)
+    req.addEventListener('load', function() {
+      // Check to make sure valid response is received
+      if (req.status >= 200 && req.status < 400) {
+        // Parse out the JSON information
+        var infoReceived = JSON.parse(req.responseText);
+        constructTable(infoReceived);
+      } else {
+        // If a server error was received, post the response text to the log
+        console.log("Error in network request: " + request.statusText);
+      }
+    });
+    // Send the request and prevent default refresh
+    req.send(null);
+  });
+}
+
 function constructTable(input) {
   clearTable();
   var tbody = document.getElementById("tbody");
@@ -22,6 +54,7 @@ function constructTable(input) {
       updateButton.type = "submit";
       updateButton.value = "update";
       updateButton.textContent = "update";
+      linkUpdateButton(updateButton, object["id"]);
       newCell.appendChild(updateButton);
       newRow.appendChild(newCell);
       
@@ -32,6 +65,7 @@ function constructTable(input) {
       deleteButton.type = "submit";
       deleteButton.value = "delete";
       deleteButton.textContent = "delete";
+      linkDeleteButton(deleteButton, object["id"]);
       newCell.appendChild(deleteButton);
       newRow.appendChild(newCell);
       
@@ -46,7 +80,6 @@ function constructTable(input) {
       tbody.appendChild(newRow);
     });
   }
-  clearTable();
   return tbody;
 }
 

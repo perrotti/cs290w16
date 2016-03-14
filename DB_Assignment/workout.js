@@ -93,14 +93,16 @@ app.get('/update', function(req, res, next) {
 
 app.get('/delete', function(req, res, next) {
   var input = {};
-  input.javascriptfile = "/js/intro.js";
-  input.chartdata = "Blue";
-  // Dummy data for main bootstrap file
-  input.one = "Text";
-  input.two = 0;
-  input.three = 0;
-  input.four = 0;
-  res.render('workout', input);
+  pool.query("DELETE FROM workout WHERE id=?", [req.query.id] , function(err, result){
+    pool.query('SELECT * FROM workout', function(err, rows, fields){
+      if(err){
+        next(err);
+        return;
+      }
+      var tableInfo = JSON.stringify(rows);
+      res.send(tableInfo);
+    });
+  });
 });
 
 app.get('/reset-table',function(req,res,next){
