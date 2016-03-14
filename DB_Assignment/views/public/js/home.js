@@ -112,7 +112,7 @@ function formSubmission() {
     // Pull in the values from the forms
     var name = document.getElementById("name-input").value;
     var reps = document.getElementById("reps-input").value;
-    var weight = document.getElementById("weight-code").value;
+    var weight = document.getElementById("weight-input").value;
     var date = document.getElementById("date-input").value;
     var lbs = document.getElementById("lbs-input").value;
     var getString = "";
