@@ -1,20 +1,26 @@
+// Root URL of the website
 var url = "http://52.24.188.242:4999";
 
+// This function links the update button for a row to a function call
 function clearTable() {
   var tbody = document.getElementById("tbody");
+  // Remove all children of the table->tbody
   while (tbody.firstChild) {
     tbody.removeChild(tbody.firstChild);
   }
 }
 
+// This function links the update button for a row to a function call
 function linkUpdateButton(button, id) {
   button.addEventListener('click', function(event) {
+    // Basically, send the user to anothr page and pass the ID of this item
     event.preventDefault();
     var variable = "id=" + id;
     window.location.href = "../update?" + variable;
   });
 }
 
+// This function links the delete button for a row to a function call
 function linkDeleteButton(button, id) {
   button.addEventListener('click', function(event) {
     event.preventDefault();
@@ -126,7 +132,7 @@ function formSubmission() {
     var lbs = document.getElementById("lbs-input").value;
     var getString = "";
     var validInput = true;
-    // Check to make sure the user provided accurate values (city && state get presedence)
+    // Check to make sure the user provided accurate values
     if (name != "") {
       getString = "/insert?" + "name=" + name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + lbs;
     } else { 

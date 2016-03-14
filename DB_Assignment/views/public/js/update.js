@@ -15,7 +15,7 @@ function formSubmission() {
     var lbs = document.getElementById("lbs-input").value;
     var getString = "";
     var validInput = true;
-    // Check to make sure the user provided accurate values (city && state get presedence)
+    // Check to make sure the user provided accurate values
     if (name != "") {
       getString = "/update_submit?" + "id=" + id + "&name=" + name + "&reps=" + reps + "&weight=" + weight + "&date=" + date + "&lbs=" + lbs;
     } else { 
