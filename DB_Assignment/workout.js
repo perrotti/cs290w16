@@ -102,7 +102,7 @@ app.get('/update', function(req, res, next) {
     input.weight = rows[0].weight;
     input.date = rows[0].date;
     input.lbs = rows[0].lbs;
-    res.send('update', input);
+    res.render('update', input);
   });
 });
 
