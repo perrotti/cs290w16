@@ -50,7 +50,6 @@ app.get('/', function(req, res, next) {
     input.tableInfo = "STUFF";
     input.results = "PAGE LOADED";
     res.render('testing', input);
-  });
 });
 
 app.get('/testing', function(req, res, next) {
@@ -61,7 +60,7 @@ app.get('/testing', function(req, res, next) {
         next(err);
         return;
       }
-      var tableInfo = JSON.stringify(rows);
+      input.tableInfo = JSON.stringify(rows);
       res.send(tableInfo);
     });
   });
