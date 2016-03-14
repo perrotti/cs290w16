@@ -147,7 +147,7 @@ function formSubmission() {
           requestTable();
         } else {
           // If a server error was received, post the response text to the log
-          console.log("Error in network request: " + request.statusText);
+          console.log("Error in network request: " + req.statusText);
         }
       });
       // Send the request and prevent default refresh
