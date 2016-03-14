@@ -41,7 +41,16 @@ function constructTable(input) {
   return table;
 }
 
+function clearTable() {
+  var table = document.getElementById("table");
+  int i;
+  for (i = 1 < table.childNodes.length; i++) {
+    table.removeChild(table.lastChild);
+  }
+}
+
 function requestTable() {
+  clearTable();
   var req = new XMLHttpRequest();
   var requestString = url + "/select";
   req.open("GET", requestString, true);
@@ -63,15 +72,6 @@ function requestTable() {
   // Send the request and prevent default refresh
   req.send(null);
 }
-
-function clearTable() {
-  var table = document.getElementById("table");
-  int i;
-  for (i = 1 < table.childNodes.length; i++) {
-    table.removeChild(table.lastChild);
-  }
-}
-
 
 // Add an event listener that doesn't trigger until the entire HTML page is loaded
 //document.addEventListener('DOMContentLoaded', formSubmission);
@@ -155,7 +155,3 @@ function formSubmission() {
 }*/
 
 requestTable();
-
-var delay=10000; 
-setTimeout(clearTable,delay);
-setTimeout(function(){clearTable()}, delay); 
