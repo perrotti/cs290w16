@@ -96,7 +96,7 @@ app.get('/update', function(req, res, next) {
       return;
     }
     console.log(rows);
-    input.buttonId = "Submit-" + String(rows[0].id);
+    input.id = rows[0].id;
     input.name = rows[0].name;
     input.reps = rows[0].reps;
     input.weight = rows[0].weight;
@@ -107,7 +107,7 @@ app.get('/update', function(req, res, next) {
 });
 
 app.get('/update_submit', function(req,res,next){
-  var context = {};
+  var input = {};
   mysql.pool.query("SELECT * FROM workout WHERE id=?", [req.query.id], function(err, result){
     if(err){
       next(err);
@@ -116,13 +116,15 @@ app.get('/update_submit', function(req,res,next){
     if(result.length == 1){
       var curVals = result[0];
       mysql.pool.query("UPDATE workout SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=? ",
-        [req.query.name || curVals.name, req.query.reps || curVals.reps, req.query.weight || curVals.weight, req.query.date || curVals.date, req.query.lbs || curVals.lbs, req.query.id],
+        [req.query.name || curVals.name, req.query.reps || curVals.reps, req.query.weight || curVals.weight, curVals.date, req.query.lbs || curVals.lbs, req.query.id],
         function(err, result){
         if(err){
           next(err);
           return;
         }
-        res.redirect('http://localhost/');
+        console.log(result);
+        input.status = "Updated row with ID = " + req.query.id;
+        res.render('workout', input);
       });
     }
   });
