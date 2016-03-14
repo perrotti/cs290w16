@@ -38,12 +38,10 @@ app.get('/', function(req, res, next) {
 });
 
 app.get('/insert', function(req, res, next) {
-  var input = {};
-  pool.query("INSERT INTO workout (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs] , function(err, result){
-    var id = result.insertId;
-    console.log(result);
-    res.setHeader('Content-Type', 'text/plain');
-    res.sendStatus(id);
+  pool.query("INSERT INTO workout (`name`, `reps`, `weight`, `date`, `lbs`) VALUES (?, ?, ?, ?, ?)", [req.query.name, req.query.reps, req.query.weight, req.query.date, req.query.lbs], function(err, result){
+    var info = JSON.stringify(result);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(info);
   });
 });
 
