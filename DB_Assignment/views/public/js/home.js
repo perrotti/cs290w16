@@ -137,7 +137,7 @@ function formSubmission() {
         // Check to make sure valid response is received
         if (req.status >= 200 && req.status < 400) {
           // Server sends back ID that was created, alert user that new ID was accepted
-          var newRowId = req.responseText.id;
+          var newRowId = req.responseText;
           console.log(req.responseText);
           console.log(newRowId);
           document.getElementById("status").textContent = "Added new workout row with ID = " + newRowId;
