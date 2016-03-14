@@ -32,7 +32,9 @@ function formSubmission() {
       req.addEventListener('load', function() {
         // Check to make sure valid response is received
         if (req.status >= 200 && req.status < 400) {
-          // Do nothing because other page needs to load
+          // Send to home page
+          var variable = "id=" + id;
+          window.location.href = "../?" + variable;
         } else {
           // If a server error was received, post the response text to the log
           console.log("Error in network request: " + req.statusText);
