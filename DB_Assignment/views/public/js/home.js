@@ -46,6 +46,7 @@ function constructTable(input) {
       tbody.appendChild(newRow);
     });
   }
+  clearTable();
   return tbody;
 }
 
@@ -151,4 +152,3 @@ function formSubmission() {
 }*/
 
 requestTable();
-clearTable();
