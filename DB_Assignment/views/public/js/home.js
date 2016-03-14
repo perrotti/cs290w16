@@ -13,6 +13,7 @@ function constructTable(input) {
       updateButton.id = "update-" + object["id"];
       updateButton.type = "submit";
       updateButton.value = "update";
+      updateButton.textContent = "update";
       newCell.appendChild(updateButton);
       newRow.appendChild(newCell);
       
@@ -22,6 +23,7 @@ function constructTable(input) {
       deleteButton.id = "delete-" + object["id"];
       deleteButton.type = "submit";
       deleteButton.value = "delete";
+      deleteButton.textContent = "delete";
       newCell.appendChild(deleteButton);
       newRow.appendChild(newCell);
       
