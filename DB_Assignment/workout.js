@@ -43,7 +43,7 @@ app.get('/insert', function(req, res, next) {
     var id = result.insertId;
     console.log(result);
     res.setHeader('Content-Type', 'text/plain');
-    res.send(id);
+    res.sendStatus(id);
   });
 });
 
