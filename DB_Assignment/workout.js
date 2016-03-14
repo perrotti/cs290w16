@@ -63,7 +63,7 @@ app.get('/testing', function(req, res, next) {
         return;
       }
       input.tableInfo = JSON.stringify(rows);
-      res.send(input.tableInfo);
+      res.render('testing',input.tableInfo);
     });
   });
 });
