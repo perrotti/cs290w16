@@ -1,11 +1,15 @@
 var url = "http://52.24.188.242:4999";
 
+function clearTable() {
+  var tbody = document.getElementById("tbody");
+  while (tbody.firstChild) {
+    tbody.removeChild(tbody.firstChild);
+  }
+}
+
 function constructTable(input) {
   clearTable();
-  var table = document.getElementById("table");
-  var tbody = document.createElement("tbody");
-  tbody.id = "tbody";
-  table.appendChild(tbody);
+  var tbody = document.getElementById("tbody");
   if (input[0] != null)  {
     var keys = Object.keys(input[0]);
     input.forEach(function(object) {
@@ -42,16 +46,7 @@ function constructTable(input) {
       tbody.appendChild(newRow);
     });
   }
-  return table;
-}
-
-function clearTable() {
-  var table = document.getElementById("table");
-  var i;
-  if (table.childNodes.length > 1) {
-    var tbody = getElementById("tbody");
-    tbody.parentNode.removeChild(tbody);
-  }
+  return tbody;
 }
 
 function requestTable() {
