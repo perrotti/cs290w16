@@ -49,7 +49,6 @@ app.get('/', function(req, res, next) {
     }
     input.results = "Table Loaded";
     input.tableInfo = JSON.stringify(rows);
-    res.setHeader('Content-Type', 'application/json');
     res.render("workout", input);
   });
 });
