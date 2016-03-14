@@ -57,18 +57,6 @@ app.get('/select', function(req, res, next) {
   });
 });
 
-app.get('/update', function(req, res, next) {
-  var input = {};
-  input.javascriptfile = "/js/intro.js";
-  input.chartdata = "Blue";
-  // Dummy data for main bootstrap file
-  input.one = "Text";
-  input.two = 0;
-  input.three = 0;
-  input.four = 0;
-  res.render('workout', input);
-});
-
 app.get('/delete', function(req, res, next) {
   var input = {};
   pool.query("DELETE FROM workout WHERE id=?", [req.query.id] , function(err, result){
@@ -84,7 +72,7 @@ app.get('/delete', function(req, res, next) {
 });
 
 app.get('/reset-table',function(req,res,next){
-  var context = {};
+  var input = {};
   pool.query("DROP TABLE IF EXISTS workout", function(err){
     var createString = "CREATE TABLE workout("+
     "id INT PRIMARY KEY AUTO_INCREMENT,"+
@@ -94,9 +82,49 @@ app.get('/reset-table',function(req,res,next){
     "date DATE,"+
     "lbs BOOLEAN)";
     pool.query(createString, function(err){
-      context.results = "Table reset";
-      res.render('workout', context);
+      input.status = "Table reset";
+      res.render('workout', input);
     })
+  });
+});
+
+app.get('/update', function(req, res, next) {
+  var input = {};
+  pool.query('SELECT * FROM workout WHERE id=?', [req.query.id], function(err, rows, fields){
+    if(err){
+      next(err);
+      return;
+    }
+    console.log(rows);
+    input.buttonId = "Submit-" + String(rows[0].id);
+    input.name = rows[0].name;
+    input.reps = rows[0].reps;
+    input.weight = rows[0].weight;
+    input.date = rows[0].date;
+    input.lbs = rows[0].lbs;
+    res.send('update', input);
+  });
+});
+
+app.get('/update_submit', function(req,res,next){
+  var context = {};
+  mysql.pool.query("SELECT * FROM workout WHERE id=?", [req.query.id], function(err, result){
+    if(err){
+      next(err);
+      return;
+    }
+    if(result.length == 1){
+      var curVals = result[0];
+      mysql.pool.query("UPDATE workout SET name=?, reps=?, weight=?, date=?, lbs=? WHERE id=? ",
+        [req.query.name || curVals.name, req.query.reps || curVals.reps, req.query.weight || curVals.weight, req.query.date || curVals.date, req.query.lbs || curVals.lbs, req.query.id],
+        function(err, result){
+        if(err){
+          next(err);
+          return;
+        }
+        res.redirect('http://localhost/');
+      });
+    }
   });
 });
 

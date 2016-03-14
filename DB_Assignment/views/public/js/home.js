@@ -138,8 +138,6 @@ function formSubmission() {
         if (req.status >= 200 && req.status < 400) {
           // Server sends back ID that was created, alert user that new ID was accepted
           var insertInfo = JSON.parse(req.responseText);
-          console.log(insertInfo.insertId);
-          console.log(insertInfo);
           document.getElementById("status").textContent = "Added new workout row with ID = " + insertInfo.insertId;
           // Clear the form
           document.forms['main-form'].reset();
