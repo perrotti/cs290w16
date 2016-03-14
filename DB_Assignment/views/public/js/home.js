@@ -10,7 +10,7 @@ function clearTable() {
 function linkUpdateButton(button, id) {
   button.addEventListener('click', function(event) {
     event.preventDefault();
-    var variable = "id=" + object["id"];
+    var variable = "id=" + id;
     window.location.href = "../update?" + variable;
   });
 }
