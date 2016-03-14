@@ -68,16 +68,14 @@ app.get('/testing', function(req, res, next) {
 
 
 app.get('/select', function(req, res, next) {
-  var input = {};
   pool.query('SELECT * FROM workout', function(err, rows, fields){
     if(err){
       next(err);
       return;
     }
-    input.tableInfo = "Table Loaded";
-    input.tableInfo = JSON.stringify(rows);
+    var tableInfo = JSON.stringify(rows);
     res.setHeader('Content-Type', 'application/json');
-    res.send(input);
+    res.send(tableInfo);
   });
 });
 
