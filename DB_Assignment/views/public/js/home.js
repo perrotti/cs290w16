@@ -1,8 +1,10 @@
 var url = "http://52.24.188.242:4999";
 
 function constructTable(input) {
+  clearTable();
   var table = document.getElementById("table");
   var tbody = document.createElement("tbody");
+  tbody.id = "tbody";
   table.appendChild(tbody);
   if (input[0] != null)  {
     var keys = Object.keys(input[0]);
@@ -46,13 +48,13 @@ function constructTable(input) {
 function clearTable() {
   var table = document.getElementById("table");
   var i;
-  for (i = table.childNodes.length - 1; i > 0; i--) {
-    table.removeChild(table.childNodes[i]);
+  if (table.childNodes.length > 1) {
+    var tbody = getElementById("tbody");
+    tbody.parentNode.removeChild(tbody);
   }
 }
 
 function requestTable() {
-  clearTable();
   var req = new XMLHttpRequest();
   var requestString = url + "/select";
   req.open("GET", requestString, true);
