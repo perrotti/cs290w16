@@ -77,7 +77,7 @@ function constructTable(input) {
           if(key == "date") {
             newCell = document.createElement("td");
             var tempString = object[key];
-            newCell.textContent = tempString.substring(0,9);
+            newCell.textContent = tempString.substring(1,10);
             newRow.appendChild(newCell);
           } else {
             newCell = document.createElement("td");
