@@ -74,9 +74,16 @@ function constructTable(input) {
       // Add the values for each field from SQL query
       keys.forEach(function(key) {
         if (key != "id") {
-        newCell = document.createElement("td");
-        newCell.textContent = object[key];
-        newRow.appendChild(newCell);
+          if(key = "date") {
+            newCell = document.createElement("td");
+            var tempString = object[key];
+            newCell.textContent = tempString.substring(0,9);
+            newRow.appendChild(newCell);
+          } else {
+            newCell = document.createElement("td");
+            newCell.textContent = object[key];
+            newRow.appendChild(newCell);
+          }
         }
       });
       tbody.appendChild(newRow);
