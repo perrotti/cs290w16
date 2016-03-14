@@ -49,7 +49,7 @@ app.get('/', function(req, res, next) {
     }*/
     input.tableInfo = "STUFF";
     input.results = "PAGE LOADED";
-    res.render('testing', input);
+    res.render('workout', input);
 });
 
 app.get('/testing', function(req, res, next) {
