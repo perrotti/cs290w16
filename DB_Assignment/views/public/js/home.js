@@ -140,6 +140,8 @@ function formSubmission() {
           var newRowId = req.responseText;
           console.log(newRowId);
           document.getElementById("status").textContent = "Added new workout row with ID = " + newRowId;
+          // Clear the form
+          document.forms['main-form'].reset();
           // Refresh the table
           requestTable();
         } else {
