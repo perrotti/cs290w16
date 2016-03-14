@@ -42,13 +42,14 @@ pool.query("INSERT INTO workout (`name`, `reps`, `weight`, `date`, `lbs`) VALUES
 
 app.get('/', function(req, res, next) {
   var input = {};
-  pool.query('SELECT * FROM workout', function(err, rows, fields){
+  /*pool.query('SELECT * FROM workout', function(err, rows, fields){
     if(err){
       next(err);
       return;
-    }
-    input.tableInfo = JSON.stringify(rows);
-    res.render('workout', input);
+    }*/
+    input.tableInfo = "STUFF";
+    input.results = "PAGE LOADED";
+    res.render('testing', input);
   });
 });
 
@@ -60,8 +61,8 @@ app.get('/testing', function(req, res, next) {
         next(err);
         return;
       }
-      input.tableInfo = JSON.stringify(rows);
-      res.render('testing',input);
+      var tableInfo = JSON.stringify(rows);
+      res.send(tableInfo);
     });
   });
 });

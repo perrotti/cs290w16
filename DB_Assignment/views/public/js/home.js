@@ -48,8 +48,8 @@ function requestTable() {
     // Check to make sure valid response is received
     if (req.status >= 200 && req.status < 400) {
       // Parse out the JSON information
-      console.log(req.input.tableInfo);
-      var infoReceived = JSON.parse(req.input.tableInfo);
+      console.log(req.responseText);
+      var infoReceived = JSON.parse(req.responseText);
       console.log(infoReceived);
       document.getElementById("test").textContent = infoReceived;
       constructTable(infoReceived);
